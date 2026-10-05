@@ -1,0 +1,43 @@
+{
+  "expo": {
+    "name": "Beer Together",
+    "slug": "beer-together",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "scheme": "beertogether",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0A0A0C"
+    },
+    "updates": {
+      "enabled": false,
+      "checkAutomatically": "NEVER"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "app.beertogether.mobile",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Konumunuz sadece aktif bir buluşmanız varken mekan check-in doğrulamasında kullanılır.",
+        "NSCameraUsageDescription": "Buluşmayı tamamlamak ve fotoğraf yüklemek için kamera erişimi gerekir."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0A0A0C"
+      },
+      "package": "app.beertogether.mobile",
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "CAMERA"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}

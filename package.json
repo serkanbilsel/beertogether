@@ -1,0 +1,30 @@
+{
+  "name": "beer-together-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Beer Together — Real life meetup and commitment platform for beer & drinks with friends",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev:web",
+    "dev:web": "npm --workspace=@beer-together/web run dev",
+    "dev:mobile": "npm --workspace=@beer-together/mobile run start",
+    "build": "npm --workspace=@beer-together/shared run build && npm --workspace=@beer-together/web run build",
+    "lint": "npm run lint --workspaces --if-present",
+    "test": "node --test packages/shared/tests/*.test.js"
+  },
+  "keywords": [
+    "beer-together",
+    "meetup",
+    "nextjs",
+    "react-native",
+    "expo",
+    "supabase",
+    "postgis",
+    "i18n"
+  ],
+  "author": "Beer Together Team",
+  "license": "MIT"
+}
