@@ -11,21 +11,7 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ t, theme = 'dark' }) => {
   return (
-    <section className="relative pt-12 pb-16 md:pt-20 md:pb-28 overflow-hidden" aria-labelledby="hero-heading">
-      {/* Dynamic Ambient Golden Brew Glows */}
-      <div
-        className="absolute top-1/4 end-[-100px] w-[550px] h-[550px] -translate-y-1/2 rounded-full pointer-events-none blur-[120px] opacity-25"
-        style={{
-          background: 'radial-gradient(circle, #F59E0B 0%, #D97706 40%, rgba(245, 158, 11, 0) 70%)',
-        }}
-      />
-      <div
-        className="absolute bottom-10 start-[-80px] w-[400px] h-[400px] rounded-full pointer-events-none blur-[100px] opacity-15"
-        style={{
-          background: 'radial-gradient(circle, #F59E0B 0%, rgba(245, 158, 11, 0) 70%)',
-        }}
-      />
-
+    <section className="relative pt-8 pb-16 md:pt-14 md:pb-24 overflow-hidden" aria-labelledby="hero-heading">
       <div className="container-main">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Column: Slogan, Value Prop & CTAs */}
