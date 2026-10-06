@@ -5,13 +5,14 @@ import { TranslationType } from '@/lib/translations/en';
 import {
   Calendar,
   Beer,
-  Sparkles,
-  Navigation,
+  MapPin,
+  Check,
+  Send,
   Heart,
   Share2,
-  Users,
-  MessageCircle,
-  Check,
+  Clock,
+  ChevronRight,
+  ShieldCheck,
 } from 'lucide-react';
 
 interface IPhone3DProps {
@@ -19,15 +20,13 @@ interface IPhone3DProps {
   theme?: 'light' | 'dark';
 }
 
-export const IPhone3D: React.FC<IPhone3DProps> = ({ t, theme = 'dark' }) => {
+export const IPhone3D: React.FC<IPhone3DProps> = ({ t }) => {
   const [viewMode, setViewMode] = useState<'front' | 'back'>('front');
-  const [rotate, setRotate] = useState({ x: 2, y: -3 });
+  const [rotate, setRotate] = useState({ x: 2, y: -2 });
   const [isJoined, setIsJoined] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const isDark = theme === 'dark';
-
-  // Subtle physical micro-tilt (max 3 degrees)
+  // Subtle physical micro-tilt (max 2.5 degrees) for heavy premium feel
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
@@ -36,14 +35,14 @@ export const IPhone3D: React.FC<IPhone3DProps> = ({ t, theme = 'dark' }) => {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rotateY = ((x - centerX) / centerX) * 3;
-    const rotateX = -((y - centerY) / centerY) * 3;
+    const rotateY = ((x - centerX) / centerX) * 2.5;
+    const rotateX = -((y - centerY) / centerY) * 2.5;
 
     setRotate({ x: rotateX, y: rotateY });
   };
 
   const handleMouseLeave = () => {
-    setRotate({ x: 2, y: -3 });
+    setRotate({ x: 2, y: -2 });
   };
 
   const isFlipped = viewMode === 'back';
@@ -51,37 +50,33 @@ export const IPhone3D: React.FC<IPhone3DProps> = ({ t, theme = 'dark' }) => {
   return (
     <div className="relative flex flex-col items-center select-none w-full">
       
-      {/* Sleek Floating View Switcher */}
+      {/* Minimalist Floating Perspective Switcher */}
       <div className="mb-4 z-40">
-        <div className={`inline-flex items-center p-1 rounded-full backdrop-blur-xl shadow-lg transition-colors ${
-          isDark
-            ? 'bg-zinc-900/90 border border-zinc-800 shadow-black/40'
-            : 'bg-white/90 border border-zinc-200 shadow-zinc-300/40'
-        }`}>
+        <div className="inline-flex items-center p-1 rounded-full bg-zinc-900/90 border border-zinc-800 backdrop-blur-xl shadow-xl shadow-black/30">
           <button
             onClick={() => setViewMode('front')}
             className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
               !isFlipped
                 ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-zinc-950 shadow-md'
-                : isDark ? 'text-zinc-400 hover:text-white' : 'text-zinc-600 hover:text-zinc-950'
+                : 'text-zinc-400 hover:text-white'
             }`}
           >
-            Ön Ekran ({isDark ? '🌙 Gece' : '☀️ Gündüz'})
+            Ön Ekran (iOS Arayüzü)
           </button>
           <button
             onClick={() => setViewMode('back')}
             className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
               isFlipped
                 ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-zinc-950 shadow-md'
-                : isDark ? 'text-zinc-400 hover:text-white' : 'text-zinc-600 hover:text-zinc-950'
+                : 'text-zinc-400 hover:text-white'
             }`}
           >
-            Titanyum Kasa
+            Titanyum Gövde
           </button>
         </div>
       </div>
 
-      {/* 3D Scene Stage (Enlarged Pro Max Scale) */}
+      {/* 3D Scene Viewport */}
       <div
         ref={containerRef}
         onMouseMove={handleMouseMove}
@@ -89,37 +84,11 @@ export const IPhone3D: React.FC<IPhone3DProps> = ({ t, theme = 'dark' }) => {
         className="relative w-full max-w-[380px] sm:max-w-[410px] h-[720px] sm:h-[750px] mx-auto flex items-center justify-center cursor-default"
         style={{ perspective: '1600px' }}
       >
-        {/* Realistic Studio Neutral Floor Contact Shadows (Clean, No colored blob) */}
-        <div className={`absolute -bottom-8 w-[320px] h-[40px] rounded-[100%] blur-2xl pointer-events-none -z-10 ${
-          isDark ? 'bg-black/90' : 'bg-black/35'
-        }`} />
-        <div className={`absolute -bottom-5 w-[250px] h-[22px] rounded-[100%] blur-md pointer-events-none -z-10 ${
-          isDark ? 'bg-black' : 'bg-black/50'
-        }`} />
+        {/* Physical Studio Contact Floor Shadow */}
+        <div className="absolute -bottom-8 w-[320px] h-[36px] bg-black/50 rounded-[100%] blur-2xl pointer-events-none -z-10" />
+        <div className="absolute -bottom-5 w-[240px] h-[20px] bg-black/70 rounded-[100%] blur-md pointer-events-none -z-10" />
 
-        {/* Floating Live Card Badge (Front Mode only) */}
-        {!isFlipped && (
-          <div
-            className={`absolute -top-2 -left-4 sm:-left-8 z-30 backdrop-blur-xl px-4 py-2.5 rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.5)] border flex items-center gap-3 transition-transform duration-300 pointer-events-none hidden sm:flex ${
-              isDark
-                ? 'bg-zinc-900/95 text-white border-orange-500/30'
-                : 'bg-white/95 text-zinc-900 border-orange-400/40 shadow-orange-500/10'
-            }`}
-            style={{
-              transform: `translate3d(${rotate.y * -1.2}px, ${rotate.x * -1.2}px, 25px)`,
-            }}
-          >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center text-zinc-950 font-black shadow-md">
-              <Beer className="w-5 h-5 text-zinc-950" />
-            </div>
-            <div className="text-start">
-              <p className="text-[10px] font-bold text-orange-500 uppercase tracking-wider">Masa Açıldı</p>
-              <p className="text-xs font-bold leading-tight">Kadıköy • 20:30 (Masa 12)</p>
-            </div>
-          </div>
-        )}
-
-        {/* 3D Phone Body (Large Pro Max Sizing) */}
+        {/* 3D Phone Body */}
         <div
           className="relative w-[345px] sm:w-[370px] h-[685px] sm:h-[715px] transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
           style={{
@@ -128,10 +97,10 @@ export const IPhone3D: React.FC<IPhone3DProps> = ({ t, theme = 'dark' }) => {
           }}
         >
           {/* ========================================================================= */}
-          {/* FRONT FACE: SUNSET ORANGE TITANIUM IPHONE WITH ADAPTIVE OLED SCREEN */}
+          {/* FRONT FACE: METALLIC SUNSET ORANGE TITANIUM WITH CRISP LIGHT MODE SCREEN */}
           {/* ========================================================================= */}
           <div
-            className="absolute inset-0 rounded-[52px] p-[2.5px] shadow-[0_35px_80px_-10px_rgba(0,0,0,0.85),0_15px_35px_-5px_rgba(0,0,0,0.55)]"
+            className="absolute inset-0 rounded-[52px] p-[2.5px] shadow-[0_30px_70px_-10px_rgba(0,0,0,0.65),0_15px_30px_-5px_rgba(0,0,0,0.4)]"
             style={{
               backfaceVisibility: 'hidden',
               transform: 'rotateY(0deg)',
@@ -140,9 +109,9 @@ export const IPhone3D: React.FC<IPhone3DProps> = ({ t, theme = 'dark' }) => {
             }}
           >
             {/* Metallic Specular Chamfer Highlight Ring */}
-            <div className="absolute inset-0 rounded-[52px] ring-1 ring-inset ring-white/30 pointer-events-none" />
+            <div className="absolute inset-0 rounded-[52px] ring-1 ring-inset ring-white/35 pointer-events-none" />
 
-            {/* Precision Antenna Slots */}
+            {/* Precision CNC Antenna Slots */}
             <div className="absolute -left-[3px] top-[90px] w-[3px] h-[3px] bg-[#7C2D12]" />
             <div className="absolute -left-[3px] bottom-[90px] w-[3px] h-[3px] bg-[#7C2D12]" />
             <div className="absolute -right-[3px] top-[90px] w-[3px] h-[3px] bg-[#7C2D12]" />
@@ -154,288 +123,185 @@ export const IPhone3D: React.FC<IPhone3DProps> = ({ t, theme = 'dark' }) => {
             <div className="absolute -left-[4px] top-[220px] w-[3.5px] h-[52px] bg-gradient-to-r from-[#9A3412] to-[#EA580C] rounded-l-[2px]" />
             <div className="absolute -right-[4px] top-[165px] w-[3.5px] h-[70px] bg-gradient-to-l from-[#9A3412] to-[#EA580C] rounded-r-[2px]" />
 
-            {/* Inner Black OLED Bezel */}
-            <div className="w-full h-full rounded-[49.5px] bg-black p-[6px] overflow-hidden flex flex-col justify-between">
+            {/* Inner Black Bezel (Uniform 2mm) */}
+            <div className="w-full h-full rounded-[49.5px] bg-black p-[5.5px] overflow-hidden flex flex-col justify-between">
               
-              {/* Screen Display Container */}
-              <div
-                className={`relative w-full h-full rounded-[44px] overflow-hidden flex flex-col font-sans transition-colors duration-300 ${
-                  isDark
-                    ? 'bg-[#09090B] text-white'
-                    : 'bg-[#F4F4F5] text-zinc-900'
-                }`}
-              >
+              {/* Ultra-Clean Apple iOS Light Screen */}
+              <div className="relative w-full h-full rounded-[44px] bg-[#F8F9FA] text-zinc-900 overflow-hidden flex flex-col font-sans">
+                
                 {/* Dynamic Island + Status Bar */}
-                <div
-                  className={`relative z-20 pt-2.5 px-6 pb-1.5 flex items-center justify-between text-xs font-semibold transition-colors ${
-                    isDark ? 'text-zinc-300' : 'text-zinc-900'
-                  }`}
-                >
-                  <span className="tracking-tight">20:45</span>
+                <div className="relative z-20 pt-2.5 px-6 pb-1.5 flex items-center justify-between text-xs font-semibold text-zinc-900 select-none">
+                  <span className="tracking-tight font-bold">20:00</span>
                   
                   {/* Dynamic Island Pill */}
-                  <div className="w-26 h-5.5 bg-black rounded-full flex items-center justify-between px-3 shadow-[inset_0_1px_2px_rgba(255,255,255,0.1)] border border-zinc-800/80">
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#050508] border border-zinc-700/60 flex items-center justify-center">
+                  <div className="w-26 h-5.5 bg-black rounded-full flex items-center justify-between px-3 shadow-inner">
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#050508] border border-zinc-700 flex items-center justify-center">
                       <div className="w-1 h-1 rounded-full bg-blue-900" />
                     </div>
                     <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                   </div>
 
                   <div className="flex items-center gap-1.5">
-                    <div
-                      className={`w-4.5 h-2.5 border rounded-[2px] p-[0.5px] ${
-                        isDark ? 'border-zinc-300' : 'border-zinc-800'
-                      }`}
-                    >
-                      <div
-                        className={`h-full w-3 rounded-[1px] ${
-                          isDark ? 'bg-zinc-300' : 'bg-zinc-800'
-                        }`}
-                      />
+                    <span className="text-[10px] font-bold text-zinc-500">5G</span>
+                    <div className="w-4.5 h-2.5 border border-zinc-900 rounded-[2px] p-[0.5px]">
+                      <div className="h-full w-3 bg-zinc-900 rounded-[1px]" />
                     </div>
                   </div>
                 </div>
 
-                {/* Craft Beer App UI (Expansive Vertical View) */}
-                <div className="relative z-10 flex-1 px-3.5 py-1.5 space-y-3 overflow-y-auto custom-scrollbar text-start">
+                {/* App Screen Content (Light Theme iOS Design) */}
+                <div className="relative z-10 flex-1 px-4 py-1.5 space-y-3 overflow-y-auto text-start">
                   
                   {/* Top Header */}
                   <div className="flex items-center justify-between pt-0.5">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center shadow-md">
+                      <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shadow-md">
                         <Beer className="w-4.5 h-4.5 text-zinc-950" />
                       </div>
                       <div>
-                        <h4
-                          className={`text-sm font-black tracking-tight leading-none ${
-                            isDark ? 'text-white' : 'text-zinc-900'
-                          }`}
-                        >
+                        <h4 className="text-sm font-extrabold tracking-tight leading-none text-zinc-900">
                           Beer Together
                         </h4>
-                        <p
-                          className={`text-[10px] font-medium mt-0.5 ${
-                            isDark ? 'text-zinc-400' : 'text-zinc-500'
-                          }`}
-                        >
-                          Kadıköy Canlı Masası
+                        <p className="text-[10px] text-zinc-500 font-medium mt-0.5">
+                          Buluşma Planı
                         </p>
                       </div>
                     </div>
-                    <span className="text-[10px] font-bold text-orange-500 bg-orange-500/10 px-2.5 py-0.5 rounded-full border border-orange-500/30 flex items-center gap-1">
-                      <Sparkles className="w-3 h-3" /> Canlı
+
+                    <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200 flex items-center gap-1">
+                      <ShieldCheck className="w-3 h-3 text-emerald-600" /> Onaylandı
                     </span>
                   </div>
 
-                  {/* Vertical Beer-Drinking Story Card (Tall & Crisp) */}
-                  <div
-                    className={`relative rounded-2xl overflow-hidden shadow-xl border ${
-                      isDark
-                        ? 'border-zinc-800/90'
-                        : 'border-zinc-200/90 shadow-zinc-300/40'
-                    }`}
-                  >
-                    <div className="relative h-44 w-full bg-zinc-900">
+                  {/* Vertical Beer-Drinking Friends Story Photo Card */}
+                  <div className="relative rounded-2xl overflow-hidden shadow-[0_8px_20px_rgba(0,0,0,0.08)] border border-zinc-200/80 bg-white">
+                    <div className="relative h-44 w-full bg-zinc-100">
+                      {/* Authentic Friends Clinking Beer Glasses */}
                       <img
                         src="https://images.unsplash.com/photo-1575037614876-c38a4d44f5b8?q=80&w=800&auto=format&fit=crop"
                         alt="Friends Cheering with Beer"
-                        className="w-full h-full object-cover object-center brightness-[0.88] contrast-[1.05]"
+                        className="w-full h-full object-cover object-center"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                       
                       {/* Top Action Pills */}
                       <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5">
-                        <div className="w-7 h-7 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white/90">
-                          <Heart className="w-3.5 h-3.5 text-orange-400 fill-orange-400/30" />
+                        <div className="w-7 h-7 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center text-white shadow">
+                          <Heart className="w-3.5 h-3.5 text-orange-400 fill-orange-400" />
                         </div>
-                        <div className="w-7 h-7 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white/90">
-                          <Share2 className="w-3.5 h-3.5 text-white" />
+                        <div className="w-7 h-7 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center text-white shadow">
+                          <Share2 className="w-3.5 h-3.5" />
                         </div>
                       </div>
 
                       {/* Photo Bottom Caption */}
-                      <div className="absolute bottom-2.5 left-3 right-3 flex items-end justify-between">
+                      <div className="absolute bottom-2.5 left-3 right-3 flex items-end justify-between text-white">
                         <div>
-                          <span className="text-[9px] font-black uppercase tracking-wider text-orange-400 bg-orange-950/90 px-2 py-0.5 rounded-md border border-orange-500/30">
-                            Craft IPA & Pilsner Gecesi
+                          <span className="text-[9px] font-bold uppercase tracking-wider text-amber-300 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded">
+                            Haftalık Buluşma
                           </span>
-                          <h3 className="text-sm font-black text-white leading-tight mt-1">
-                            The Populist • Kadıköy Moda
+                          <h3 className="text-sm font-extrabold leading-tight mt-1">
+                            Belfast Irish Pub • Kadıköy
                           </h3>
                         </div>
-                        <span className="text-[10px] font-black text-white bg-black/70 px-2.5 py-1 rounded-md border border-white/20">
-                          Masa 12
-                        </span>
                       </div>
                     </div>
 
-                    {/* Quick Meta Row */}
-                    <div
-                      className={`p-2.5 flex items-center justify-between text-xs border-t transition-colors ${
-                        isDark
-                          ? 'bg-zinc-900/95 text-zinc-300 border-zinc-800'
-                          : 'bg-white text-zinc-700 border-zinc-100'
-                      }`}
-                    >
-                      <div className="flex items-center gap-1.5">
-                        <Calendar className="w-3.5 h-3.5 text-orange-500" />
-                        <span
-                          className={`font-semibold ${
-                            isDark ? 'text-white' : 'text-zinc-900'
-                          }`}
-                        >
-                          Bu Akşam 20:30
-                        </span>
+                    {/* Venue & Time Row */}
+                    <div className="p-3 bg-white flex items-center justify-between text-xs text-zinc-700">
+                      <div className="flex items-center gap-1.5 font-semibold text-zinc-900">
+                        <Calendar className="w-4 h-4 text-amber-600" />
+                        <span>Cuma, 20:00</span>
                       </div>
-                      <div className="flex items-center gap-1 text-orange-500 font-bold">
-                        <Navigation className="w-3 h-3" />
-                        <span>350m Yakında</span>
+                      <div className="flex items-center gap-1 text-zinc-500 font-medium text-[11px]">
+                        <MapPin className="w-3.5 h-3.5 text-orange-500" />
+                        <span>Moda Cad. No: 24</span>
                       </div>
                     </div>
                   </div>
 
-                  {/* Large Prominent Friends/Attendees Section */}
-                  <div
-                    className={`p-3 rounded-2xl border space-y-2.5 transition-colors ${
-                      isDark
-                        ? 'bg-zinc-900/90 border-zinc-800/90'
-                        : 'bg-white border-zinc-200 shadow-sm'
-                    }`}
-                  >
+                  {/* Friends & Participants Section (Clean iOS Card) */}
+                  <div className="p-3.5 rounded-2xl bg-white border border-zinc-200/80 shadow-[0_4px_12px_rgba(0,0,0,0.04)] space-y-2.5">
                     <div className="flex items-center justify-between text-xs">
-                      <span
-                        className={`font-extrabold flex items-center gap-1.5 ${
-                          isDark ? 'text-white' : 'text-zinc-900'
-                        }`}
-                      >
-                        <Users className="w-4 h-4 text-orange-500" />
-                        <span>Masadaki Arkadaşlar (4/6)</span>
+                      <span className="font-extrabold text-zinc-900">
+                        Kimler Geliyor (2/2)
                       </span>
-                      <span className="text-[10px] font-bold text-emerald-500 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
-                        2 Yer Kaldı
+                      <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                        Kabul Edildi
                       </span>
                     </div>
 
-                    {/* Big User Rows */}
+                    {/* User Rows */}
                     <div className="space-y-2">
-                      {/* User 1 */}
-                      <div
-                        className={`flex items-center justify-between p-2 rounded-xl border transition-colors ${
-                          isDark
-                            ? 'bg-zinc-950/60 border-zinc-800/60'
-                            : 'bg-zinc-50 border-zinc-200/80'
-                        }`}
-                      >
+                      {/* User 1: You */}
+                      <div className="flex items-center justify-between p-2 rounded-xl bg-zinc-50 border border-zinc-100">
                         <div className="flex items-center gap-3">
                           <img
                             src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80"
-                            alt="Serkan Bilsel"
-                            className="w-9 h-9 rounded-full object-cover border-2 border-orange-500 shadow"
+                            alt="Sen"
+                            className="w-9 h-9 rounded-full object-cover border-2 border-amber-500 shadow-sm"
                           />
                           <div>
-                            <p
-                              className={`text-xs font-extrabold leading-tight ${
-                                isDark ? 'text-white' : 'text-zinc-900'
-                              }`}
-                            >
-                              Serkan Bilsel
-                            </p>
-                            <p className="text-[10px] font-semibold text-orange-500">👑 Masa Kurucusu</p>
+                            <p className="text-xs font-bold text-zinc-900 leading-tight">Sen</p>
+                            <p className="text-[10px] font-medium text-zinc-500">Davet Eden</p>
                           </div>
                         </div>
-                        <span className="text-[10px] font-bold text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
-                          Masada ✓
-                        </span>
+                        <div className="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
+                          <Check className="w-3.5 h-3.5 stroke-[3]" />
+                        </div>
                       </div>
 
-                      {/* User 2 */}
-                      <div
-                        className={`flex items-center justify-between p-2 rounded-xl border transition-colors ${
-                          isDark
-                            ? 'bg-zinc-950/60 border-zinc-800/60'
-                            : 'bg-zinc-50 border-zinc-200/80'
-                        }`}
-                      >
+                      {/* User 2: Friend */}
+                      <div className="flex items-center justify-between p-2 rounded-xl bg-zinc-50 border border-zinc-100">
                         <div className="flex items-center gap-3">
                           <img
                             src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80"
-                            alt="Mert Kaya"
-                            className="w-9 h-9 rounded-full object-cover border-2 border-zinc-400 shadow"
+                            alt="Arkadaşın"
+                            className="w-9 h-9 rounded-full object-cover border-2 border-zinc-300 shadow-sm"
                           />
                           <div>
-                            <p
-                              className={`text-xs font-extrabold leading-tight ${
-                                isDark ? 'text-zinc-200' : 'text-zinc-800'
-                              }`}
-                            >
-                              Mert & Can
-                            </p>
-                            <p
-                              className={`text-[10px] font-semibold ${
-                                isDark ? 'text-zinc-400' : 'text-zinc-500'
-                              }`}
-                            >
-                              ⚡ Yolda • 5 dk
-                            </p>
+                            <p className="text-xs font-bold text-zinc-900 leading-tight">Mert Kaya</p>
+                            <p className="text-[10px] font-medium text-emerald-600">Katılıyor</p>
                           </div>
                         </div>
-                        <span className="text-[10px] font-bold text-amber-500 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">
-                          Yolda
-                        </span>
+                        <div className="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
+                          <Check className="w-3.5 h-3.5 stroke-[3]" />
+                        </div>
                       </div>
 
-                      {/* User 3 (Interactive Joined State) */}
+                      {/* Joined Feedback */}
                       {isJoined && (
-                        <div className="flex items-center justify-between p-2 rounded-xl bg-orange-500/20 border border-orange-500/50 animate-fade-in">
+                        <div className="flex items-center justify-between p-2 rounded-xl bg-amber-50 border border-amber-200 animate-fade-in">
                           <div className="flex items-center gap-3">
-                            <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-orange-500 to-amber-400 text-zinc-950 flex items-center justify-center font-black text-xs shadow">
-                              SEN
+                            <div className="w-9 h-9 rounded-full bg-amber-500 text-white flex items-center justify-center font-extrabold text-xs shadow-sm">
+                              🍻
                             </div>
                             <div>
-                              <p className="text-xs font-black text-orange-500 leading-tight">Masaya Katıldın! 🍻</p>
-                              <p className="text-[10px] text-zinc-500">Sandalyen ayrıldı</p>
+                              <p className="text-xs font-bold text-amber-900 leading-tight">WhatsApp Daveti Gönderildi</p>
+                              <p className="text-[10px] text-amber-700">Bağlantı panoya kopyalandı</p>
                             </div>
                           </div>
-                          <Check className="w-4 h-4 text-emerald-500" />
+                          <Check className="w-4 h-4 text-emerald-600" />
                         </div>
                       )}
                     </div>
                   </div>
 
-                  {/* Professional In-Screen Action CTAs */}
-                  <div className="space-y-2 pt-1">
+                  {/* Primary CTA Button (Sleek Apple iOS Style) */}
+                  <div className="pt-1">
                     <button
                       onClick={() => setIsJoined(!isJoined)}
-                      className={`w-full py-3 px-4 rounded-xl font-black text-xs flex items-center justify-center gap-2 shadow-xl transition-all active:scale-[0.98] ${
-                        isJoined
-                          ? 'bg-emerald-500 text-zinc-950 hover:bg-emerald-400 shadow-emerald-500/25'
-                          : 'bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 text-zinc-950 hover:brightness-110 shadow-orange-500/30'
-                      }`}
+                      className="w-full py-3.5 px-4 rounded-xl font-bold text-xs flex items-center justify-center gap-2 bg-[#18181B] hover:bg-black text-white shadow-lg shadow-black/15 transition-all active:scale-[0.98]"
                     >
-                      <Beer className="w-4 h-4" />
-                      <span>{isJoined ? 'Masadasın! (İptal Et)' : 'Masaya Katıl (Yerini Ayırt)'}</span>
-                    </button>
-
-                    <button
-                      className={`w-full py-2.5 px-4 rounded-xl font-bold text-xs flex items-center justify-center gap-2 border shadow-sm transition-all active:scale-[0.98] ${
-                        isDark
-                          ? 'bg-zinc-900/90 hover:bg-zinc-800 text-zinc-200 border-zinc-700/80'
-                          : 'bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border-zinc-300'
-                      }`}
-                    >
-                      <MessageCircle className="w-4 h-4 text-emerald-500" />
-                      <span>WhatsApp’tan Arkadaş Davet Et</span>
+                      <Send className="w-3.5 h-3.5 text-amber-400 rtl:scale-x-[-1]" />
+                      <span>{isJoined ? 'Davet Gönderildi (Tekrarla)' : 'WhatsApp’tan Davet Et'}</span>
                     </button>
                   </div>
                 </div>
 
                 {/* Bottom Home Bar */}
                 <div className="w-full pb-2 flex justify-center">
-                  <div
-                    className={`w-32 h-1 rounded-full ${
-                      isDark ? 'bg-zinc-600' : 'bg-zinc-400'
-                    }`}
-                  />
+                  <div className="w-32 h-1 bg-zinc-300 rounded-full" />
                 </div>
               </div>
             </div>
@@ -445,7 +311,7 @@ export const IPhone3D: React.FC<IPhone3DProps> = ({ t, theme = 'dark' }) => {
           {/* BACK FACE: METALLIC ORANGE TITANIUM CHASSIS & 3D PRO CAMERA SYSTEM */}
           {/* ========================================================================= */}
           <div
-            className="absolute inset-0 rounded-[52px] p-[2.5px] shadow-[0_35px_80px_-10px_rgba(0,0,0,0.85),0_15px_35px_-5px_rgba(0,0,0,0.55)]"
+            className="absolute inset-0 rounded-[52px] p-[2.5px] shadow-[0_30px_70px_-10px_rgba(0,0,0,0.65),0_15px_30px_-5px_rgba(0,0,0,0.4)]"
             style={{
               backfaceVisibility: 'hidden',
               transform: 'rotateY(180deg)',
@@ -454,7 +320,7 @@ export const IPhone3D: React.FC<IPhone3DProps> = ({ t, theme = 'dark' }) => {
             }}
           >
             {/* Metallic Specular Chamfer Highlight */}
-            <div className="absolute inset-0 rounded-[52px] ring-1 ring-inset ring-white/30 pointer-events-none" />
+            <div className="absolute inset-0 rounded-[52px] ring-1 ring-inset ring-white/35 pointer-events-none" />
 
             {/* Matte Titanium Back Glass Surface */}
             <div
