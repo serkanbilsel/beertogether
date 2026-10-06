@@ -1,9 +1,8 @@
-'use client';
-
 import React, { useState, useEffect } from 'react';
 import { TranslationType } from '@/lib/translations/en';
 import { Locale } from '@/lib/translations';
 import { LanguageSwitcher } from '../ui/LanguageSwitcher';
+import { ThemeToggle } from '../ui/ThemeToggle';
 import { Button } from '../ui/Button';
 import { Menu, X } from 'lucide-react';
 
@@ -11,9 +10,17 @@ interface HeaderProps {
   t: TranslationType;
   locale: Locale;
   onLocaleChange: (locale: Locale) => void;
+  theme: 'light' | 'dark';
+  onThemeToggle: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ t, locale, onLocaleChange }) => {
+export const Header: React.FC<HeaderProps> = ({
+  t,
+  locale,
+  onLocaleChange,
+  theme,
+  onThemeToggle,
+}) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -50,7 +57,7 @@ export const Header: React.FC<HeaderProps> = ({ t, locale, onLocaleChange }) => 
       <header
         className={`sticky top-0 z-40 w-full h-[68px] transition-all duration-[var(--dur-fast)] ${
           isScrolled
-            ? 'bg-[#FAFAF9]/90 backdrop-blur-md border-b border-[var(--border)] shadow-sm'
+            ? 'bg-[var(--bg)]/90 backdrop-blur-md border-b border-[var(--border)] shadow-sm'
             : 'bg-transparent'
         }`}
       >
@@ -88,14 +95,16 @@ export const Header: React.FC<HeaderProps> = ({ t, locale, onLocaleChange }) => 
           {/* Desktop Right Actions */}
           <div className="hidden lg:flex items-center gap-3">
             <LanguageSwitcher currentLocale={locale} onSelectLocale={onLocaleChange} ariaLabel={t.a11y.language} />
+            <ThemeToggle theme={theme} onToggle={onThemeToggle} />
             <Button size="sm" asLink href="#download">
               {t.nav.getApp}
             </Button>
           </div>
 
-          {/* Mobile Hamburger Button (< 1024px) */}
+          {/* Mobile Actions (< 1024px) */}
           <div className="flex lg:hidden items-center gap-2">
             <LanguageSwitcher currentLocale={locale} onSelectLocale={onLocaleChange} ariaLabel={t.a11y.language} />
+            <ThemeToggle theme={theme} onToggle={onThemeToggle} />
             <button
               onClick={() => setMobileMenuOpen(true)}
               aria-label={t.nav.menu}

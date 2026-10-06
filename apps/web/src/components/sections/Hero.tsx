@@ -6,9 +6,10 @@ import { Sparkles } from 'lucide-react';
 
 interface HeroProps {
   t: TranslationType;
+  theme?: 'light' | 'dark';
 }
 
-export const Hero: React.FC<HeroProps> = ({ t }) => {
+export const Hero: React.FC<HeroProps> = ({ t, theme = 'dark' }) => {
   return (
     <section className="relative pt-12 pb-16 md:pt-20 md:pb-28 overflow-hidden" aria-labelledby="hero-heading">
       {/* Dynamic Ambient Golden Brew Glows */}
@@ -56,7 +57,7 @@ export const Hero: React.FC<HeroProps> = ({ t }) => {
 
           {/* Right Column: 3D Interactive iPhone Mockup */}
           <div className="lg:col-span-6 flex justify-center lg:justify-end">
-            <IPhone3D t={t} />
+            <IPhone3D t={t} theme={theme} />
           </div>
         </div>
       </div>

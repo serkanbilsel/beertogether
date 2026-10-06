@@ -15,6 +15,7 @@ import { Footer } from '@/components/sections/Footer';
 
 export default function LandingPage() {
   const [locale, setLocale] = useState<Locale>('tr');
+  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
 
   useEffect(() => {
     const rtl = isRTL(locale);
@@ -22,17 +23,49 @@ export default function LandingPage() {
     document.documentElement.lang = locale;
   }, [locale]);
 
+  useEffect(() => {
+    // Check saved theme or default to dark
+    const savedTheme = localStorage.getItem('bt-theme') as 'light' | 'dark' | null;
+    if (savedTheme) {
+      setTheme(savedTheme);
+      if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    } else {
+      document.documentElement.classList.add('dark');
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const nextTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(nextTheme);
+    localStorage.setItem('bt-theme', nextTheme);
+    if (nextTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  };
+
   const t = getTranslation(locale);
   const rtl = isRTL(locale);
 
   return (
-    <div dir={rtl ? 'rtl' : 'ltr'} className="min-h-screen flex flex-col bg-[var(--bg)] text-[var(--ink)]">
-      {/* 1. Header */}
-      <Header t={t} locale={locale} onLocaleChange={setLocale} />
+    <div dir={rtl ? 'rtl' : 'ltr'} className="min-h-screen flex flex-col bg-[var(--bg)] text-[var(--ink)] transition-colors duration-200">
+      {/* 1. Header with Language and Theme Switcher */}
+      <Header
+        t={t}
+        locale={locale}
+        onLocaleChange={setLocale}
+        theme={theme}
+        onThemeToggle={toggleTheme}
+      />
 
       <main id="main-content" className="flex-1">
-        {/* 2. Hero */}
-        <Hero t={t} />
+        {/* 2. Hero with Theme-Synced 3D iPhone */}
+        <Hero t={t} theme={theme} />
 
         {/* 3. How It Works */}
         <HowItWorks t={t} />
@@ -61,3 +94,4 @@ export default function LandingPage() {
     </div>
   );
 }
+
