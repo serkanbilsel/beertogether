@@ -12,10 +12,6 @@
       "resizeMode": "contain",
       "backgroundColor": "#0A0A0C"
     },
-    "updates": {
-      "enabled": false,
-      "checkAutomatically": "NEVER"
-    },
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "app.beertogether.mobile",

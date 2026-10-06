@@ -15,28 +15,31 @@ export const Footer: React.FC<FooterProps> = ({ t, locale, onLocaleChange }) => 
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[var(--dark-bg)] text-[var(--dark-ink)] pt-16 pb-12 border-t border-[var(--border)]">
-      <div className="container-main">
+    <footer className="bg-[#030407] text-[#F8FAFC] pt-20 pb-12 border-t border-[#1F2438] relative overflow-hidden">
+      {/* Ambient background glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[200px] bg-[var(--accent)]/5 blur-[150px] pointer-events-none rounded-full" />
+
+      <div className="container-main relative z-10">
         {/* 4 Columns */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pb-12 border-b border-white/10 text-start">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 pb-16 border-b border-[#1F2438] text-start">
           {/* Col 1: Product */}
-          <div className="space-y-3">
-            <div className="font-semibold text-xs tracking-wider uppercase text-[var(--dark-ink-2)]">
+          <div className="space-y-4">
+            <div className="font-display font-bold text-xs tracking-wider uppercase text-[var(--accent)]">
               {t.footer.colProduct}
             </div>
-            <ul className="space-y-2 text-sm text-[var(--dark-ink-2)]">
+            <ul className="space-y-2.5 text-sm text-slate-400 font-medium">
               <li>
-                <a href="#how" className="hover:text-[var(--dark-ink)] transition-colors">
+                <a href="#how" className="hover:text-white hover:translate-x-1 transition-all inline-block">
                   {t.nav.howItWorks}
                 </a>
               </li>
               <li>
-                <a href="#features" className="hover:text-[var(--dark-ink)] transition-colors">
+                <a href="#features" className="hover:text-white hover:translate-x-1 transition-all inline-block">
                   {t.nav.features}
                 </a>
               </li>
               <li>
-                <a href="#faq" className="hover:text-[var(--dark-ink)] transition-colors">
+                <a href="#faq" className="hover:text-white hover:translate-x-1 transition-all inline-block">
                   {t.nav.faq}
                 </a>
               </li>
@@ -44,18 +47,18 @@ export const Footer: React.FC<FooterProps> = ({ t, locale, onLocaleChange }) => 
           </div>
 
           {/* Col 2: Company */}
-          <div className="space-y-3">
-            <div className="font-semibold text-xs tracking-wider uppercase text-[var(--dark-ink-2)]">
+          <div className="space-y-4">
+            <div className="font-display font-bold text-xs tracking-wider uppercase text-[var(--accent)]">
               {t.footer.colCompany}
             </div>
-            <ul className="space-y-2 text-sm text-[var(--dark-ink-2)]">
+            <ul className="space-y-2.5 text-sm text-slate-400 font-medium">
               <li>
-                <a href="#" className="hover:text-[var(--dark-ink)] transition-colors">
+                <a href="#" className="hover:text-white hover:translate-x-1 transition-all inline-block">
                   {t.footer.about}
                 </a>
               </li>
               <li>
-                <a href="mailto:support@beertogether.app" className="hover:text-[var(--dark-ink)] transition-colors">
+                <a href="mailto:support@beertogether.app" className="hover:text-white hover:translate-x-1 transition-all inline-block">
                   {t.footer.contact}
                 </a>
               </li>
@@ -63,28 +66,28 @@ export const Footer: React.FC<FooterProps> = ({ t, locale, onLocaleChange }) => 
           </div>
 
           {/* Col 3: Legal */}
-          <div className="space-y-3">
-            <div className="font-semibold text-xs tracking-wider uppercase text-[var(--dark-ink-2)]">
+          <div className="space-y-4">
+            <div className="font-display font-bold text-xs tracking-wider uppercase text-[var(--accent)]">
               {t.footer.colLegal}
             </div>
-            <ul className="space-y-2 text-sm text-[var(--dark-ink-2)]">
+            <ul className="space-y-2.5 text-sm text-slate-400 font-medium">
               <li>
-                <a href="#" className="hover:text-[var(--dark-ink)] transition-colors">
+                <a href="#" className="hover:text-white hover:translate-x-1 transition-all inline-block">
                   {t.footer.privacy}
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-[var(--dark-ink)] transition-colors">
+                <a href="#" className="hover:text-white hover:translate-x-1 transition-all inline-block">
                   {t.footer.terms}
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-[var(--dark-ink)] transition-colors">
+                <a href="#" className="hover:text-white hover:translate-x-1 transition-all inline-block">
                   {t.footer.cookies}
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-[var(--dark-ink)] transition-colors">
+                <a href="#" className="hover:text-white hover:translate-x-1 transition-all inline-block">
                   {t.footer.deleteAccount}
                 </a>
               </li>
@@ -92,8 +95,8 @@ export const Footer: React.FC<FooterProps> = ({ t, locale, onLocaleChange }) => 
           </div>
 
           {/* Col 4: Language */}
-          <div className="space-y-3">
-            <div className="font-semibold text-xs tracking-wider uppercase text-[var(--dark-ink-2)]">
+          <div className="space-y-4">
+            <div className="font-display font-bold text-xs tracking-wider uppercase text-[var(--accent)]">
               {t.footer.colLang}
             </div>
             <div>
@@ -103,9 +106,9 @@ export const Footer: React.FC<FooterProps> = ({ t, locale, onLocaleChange }) => 
         </div>
 
         {/* Bottom Line */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--dark-ink-2)]">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 font-medium">
           <div>© {currentYear} {t.footer.copyright}</div>
-          <div className="font-medium">
+          <div className="font-display font-semibold text-slate-300">
             Plans, not promises.
           </div>
         </div>

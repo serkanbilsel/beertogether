@@ -1,19 +1,26 @@
 import type { Metadata } from 'next';
-import { Plus_Jakarta_Sans, Outfit } from 'next/font/google';
+import { Syne, Plus_Jakarta_Sans, Outfit } from 'next/font/google';
 import './globals.css';
+
+const syne = Syne({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-syne',
+  weight: ['600', '700', '800'],
+});
+
+const outfit = Outfit({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-display',
+  weight: ['500', '600', '700', '800', '900'],
+});
 
 const sans = Plus_Jakarta_Sans({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-sans',
-  weight: ['400', '500', '600', '700', '800'],
-});
-
-const display = Outfit({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-display',
-  weight: ['600', '700', '800', '900'],
+  weight: ['400', '500', '600', '700'],
 });
 
 export const metadata: Metadata = {
@@ -72,14 +79,14 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={`${sans.variable} ${display.variable}`}>
+    <html lang="en" className={`${syne.variable} ${outfit.variable} ${sans.variable} dark`}>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="font-sans antialiased bg-[var(--bg)] text-[var(--ink)] selection:bg-[var(--accent)] selection:text-[var(--accent-ink)]">
+      <body className="font-sans antialiased bg-[#05060A] text-[#F8FAFC] selection:bg-[#FFB300] selection:text-[#05060A]">
         {children}
       </body>
     </html>

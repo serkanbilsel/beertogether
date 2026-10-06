@@ -3,33 +3,33 @@
 @tailwind utilities;
 
 :root {
-  /* Surfaces - Clean, Modern Slate / Pearl Light */
-  --bg:            #F8FAFC;
-  --surface:       #FFFFFF;
-  --surface-2:     #F1F5F9;
-  --border:        #E2E8F0;
+  /* Surfaces - Pure Modern Midnight Obsidian */
+  --bg:            #05060A;
+  --surface:       #0C0E17;
+  --surface-2:     #131624;
+  --border:        #1F2438;
 
-  /* Text - High-contrast Charcoal & Slate */
-  --ink:           #0F172A;
-  --ink-2:         #475569;
-  --ink-3:         #94A3B8;
+  /* Text - High-contrast Diamond White & Soft Platinum */
+  --ink:           #FFFFFF;
+  --ink-2:         #94A3B8;
+  --ink-3:         #64748B;
 
-  /* Accent: Vibrant Electric Amber / Liquid Gold */
-  --accent:        #F59E0B;
-  --accent-hover:  #D97706;
-  --accent-ink:    #090A0F;
-  --accent-text:   #D97706;
-  --accent-soft:   #FEF3C7;
+  /* Accent: Neon Electric Amber / Molten Gold */
+  --accent:        #FFB300;
+  --accent-hover:  #FFC107;
+  --accent-ink:    #05060A;
+  --accent-text:   #FFB300;
+  --accent-soft:   rgba(255, 179, 0, 0.12);
 
-  /* Dark surface (CTA banner, dark cards, footer) */
-  --dark-bg:       #0A0B10;
-  --dark-surface:  #12141C;
-  --dark-ink:      #F8FAFC;
+  /* Dark surface elements */
+  --dark-bg:       #030407;
+  --dark-surface:  #080A10;
+  --dark-ink:      #FFFFFF;
   --dark-ink-2:    #94A3B8;
 
   /* Status */
   --success:       #10B981;
-  --focus-ring:    #F59E0B;
+  --focus-ring:    #FFB300;
 
   /* Shapes */
   --radius-sm: 8px;
@@ -38,10 +38,10 @@
   --radius-xl: 32px;
   --radius-pill: 999px;
 
-  /* Shadows - Crisp, modern ambient elevation */
-  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
-  --shadow-md: 0 4px 20px -4px rgba(15, 23, 42, 0.08), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
-  --shadow-lg: 0 20px 40px -12px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(226, 232, 240, 0.8);
+  /* Shadows & Glows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 8px 32px -4px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 179, 0, 0.08);
+  --shadow-lg: 0 24px 64px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 179, 0, 0.15);
 
   /* Spacing */
   --space-2: 8px;
@@ -49,33 +49,13 @@
   --space-6: 24px;
   --space-8: 32px;
   --space-12: 48px;
-  --section-y: clamp(72px, 9vw, 128px);
+  --section-y: clamp(80px, 10vw, 140px);
 
   /* Transitions */
   --dur-fast: 150ms;
   --dur-base: 250ms;
   --dur-slow: 500ms;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg:            #08090D;
-    --surface:       #10121A;
-    --surface-2:     #161924;
-    --border:        #232736;
-    --ink:           #F8FAFC;
-    --ink-2:         #94A3B8;
-    --ink-3:         #64748B;
-    --accent:        #F59E0B;
-    --accent-hover:  #FBBF24;
-    --accent-ink:    #08090D;
-    --accent-text:   #FBBF24;
-    --accent-soft:   rgba(245, 158, 11, 0.14);
-    --focus-ring:    #F59E0B;
-    --shadow-md:     0 8px 30px rgba(0, 0, 0, 0.45);
-    --shadow-lg:     0 24px 48px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(245, 158, 11, 0.12);
-  }
 }
 
 * {
@@ -88,24 +68,24 @@ body {
   font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  background-image: 
+    radial-gradient(ellipse at 50% -20%, rgba(255, 179, 0, 0.15), transparent 70%),
+    radial-gradient(circle at 100% 60%, rgba(255, 179, 0, 0.05), transparent 50%),
+    radial-gradient(circle at 0% 80%, rgba(255, 179, 0, 0.04), transparent 50%);
+  background-attachment: fixed;
 }
 
-/* Subtle modern grid glow */
-.bg-grid-pattern {
-  background-image: radial-gradient(rgba(245, 158, 11, 0.08) 1px, transparent 0);
-  background-size: 28px 28px;
-}
-
-/* Skip to content accessibility */
+/* Skip to content */
 .skip-link {
   position: absolute;
   top: -40px;
   inset-inline-start: 16px;
-  background: var(--ink);
-  color: var(--surface);
+  background: var(--accent);
+  color: var(--accent-ink);
   padding: 8px 16px;
   z-index: 100;
   border-radius: var(--radius-sm);
+  font-weight: 700;
   transition: top var(--dur-fast) var(--ease-out);
 }
 .skip-link:focus {
@@ -120,20 +100,23 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   outline-offset: 3px !important;
 }
 
-/* Typography Classes */
+/* Typography with Syne & Outfit */
 .display-h1 {
-  font-family: var(--font-display), sans-serif;
-  font-size: clamp(2.5rem, 1.2rem + 5.2vw, 4.75rem);
-  line-height: 1.02;
+  font-family: var(--font-syne), var(--font-display), sans-serif;
+  font-size: clamp(2.75rem, 1.4rem + 5.5vw, 5.25rem);
+  line-height: 0.98;
   font-weight: 800;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.045em;
   text-wrap: balance;
+  background: linear-gradient(180deg, #FFFFFF 40%, #94A3B8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .display-h2 {
-  font-family: var(--font-display), sans-serif;
-  font-size: clamp(1.875rem, 1.1rem + 2.8vw, 3.25rem);
-  line-height: 1.08;
+  font-family: var(--font-syne), var(--font-display), sans-serif;
+  font-size: clamp(2rem, 1.2rem + 3vw, 3.5rem);
+  line-height: 1.05;
   font-weight: 800;
   letter-spacing: -0.035em;
   text-wrap: balance;
@@ -141,7 +124,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 .display-h3 {
   font-family: var(--font-display), sans-serif;
-  font-size: clamp(1.25rem, 1rem + 0.9vw, 1.625rem);
+  font-size: clamp(1.25rem, 1rem + 0.9vw, 1.65rem);
   line-height: 1.2;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -150,7 +133,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 .text-lead {
   font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
-  line-height: 1.6;
+  line-height: 1.65;
   font-weight: 400;
   color: var(--ink-2);
   max-width: 65ch;
@@ -177,8 +160,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   font-family: var(--font-display), sans-serif;
   font-size: 0.8125rem;
   line-height: 1.3;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-weight: 800;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--accent-text);
 }
@@ -195,7 +178,7 @@ html[dir="rtl"] .display-h3 {
   line-height: 1.25;
 }
 
-/* Numbers tabular nums */
+/* Numbers tabular */
 .tabular {
   font-variant-numeric: tabular-nums;
 }
@@ -220,6 +203,20 @@ html[dir="rtl"] .display-h3 {
 .container-narrow {
   max-width: 720px;
   margin-inline: auto;
+}
+
+/* Card glass aesthetics */
+.glass-card {
+  background: rgba(12, 14, 23, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 179, 0, 0.12);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 179, 0, 0.3);
+  box-shadow: 0 12px 48px 0 rgba(255, 179, 0, 0.08);
 }
 
 /* prefers-reduced-motion */
