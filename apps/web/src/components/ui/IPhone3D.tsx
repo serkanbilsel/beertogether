@@ -12,7 +12,8 @@ import {
   Navigation,
   Heart,
   Share2,
-  SlidersHorizontal,
+  Users,
+  MessageCircle,
 } from 'lucide-react';
 
 interface IPhone3DProps {
@@ -26,7 +27,7 @@ export const IPhone3D: React.FC<IPhone3DProps> = ({ t }) => {
   const [activeTab, setActiveTab] = useState<'attendees' | 'menu'>('attendees');
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Very subtle micro-tilt (max 3.5 degrees) for realistic physical weight
+  // Subtle physical micro-tilt (max 3.5 degrees)
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
@@ -50,22 +51,22 @@ export const IPhone3D: React.FC<IPhone3DProps> = ({ t }) => {
   return (
     <div className="relative flex flex-col items-center select-none">
       
-      {/* Sleek Floating View Switcher (Top of the 3D Stage) */}
+      {/* Sleek Floating View Switcher */}
       <div className="mb-4 z-40">
-        <div className="inline-flex items-center p-1 rounded-full bg-zinc-900/90 border border-zinc-800 backdrop-blur-xl shadow-lg shadow-black/30">
+        <div className="inline-flex items-center p-1 rounded-full bg-zinc-900/90 border border-zinc-800 backdrop-blur-xl shadow-lg shadow-black/40">
           <button
             onClick={() => setViewMode('front')}
-            className={`px-3.5 py-1 rounded-full text-xs font-bold transition-all ${
+            className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
               !isFlipped
                 ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-zinc-950 shadow-md'
                 : 'text-zinc-400 hover:text-white'
             }`}
           >
-            Ön Ekran
+            Ön Ekran (Canlı Masa)
           </button>
           <button
             onClick={() => setViewMode('back')}
-            className={`px-3.5 py-1 rounded-full text-xs font-bold transition-all ${
+            className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
               isFlipped
                 ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-zinc-950 shadow-md'
                 : 'text-zinc-400 hover:text-white'
@@ -76,47 +77,47 @@ export const IPhone3D: React.FC<IPhone3DProps> = ({ t }) => {
         </div>
       </div>
 
-      {/* 3D Scene Viewport */}
+      {/* 3D Scene Stage */}
       <div
         ref={containerRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="relative w-full max-w-[340px] sm:max-w-[360px] h-[620px] sm:h-[640px] mx-auto flex items-center justify-center cursor-default"
+        className="relative w-full max-w-[340px] sm:max-w-[360px] h-[640px] sm:h-[665px] mx-auto flex items-center justify-center cursor-default"
         style={{ perspective: '1600px' }}
       >
-        {/* Realistic Floor Studio Shadow (Ambient Occlusion) */}
-        <div className="absolute -bottom-6 w-[280px] h-[35px] bg-black/60 rounded-[100%] blur-xl pointer-events-none -z-10" />
-        <div className="absolute -bottom-4 w-[210px] h-[20px] bg-black/80 rounded-[100%] blur-md pointer-events-none -z-10" />
+        {/* Realistic Floor Studio Shadow */}
+        <div className="absolute -bottom-6 w-[290px] h-[35px] bg-black/70 rounded-[100%] blur-xl pointer-events-none -z-10" />
+        <div className="absolute -bottom-4 w-[220px] h-[20px] bg-black/90 rounded-[100%] blur-md pointer-events-none -z-10" />
 
-        {/* Subtle Warm Studio Key Light (No cartoon glow) */}
+        {/* Subtle Ambient Studio Light */}
         <div
-          className="absolute -top-12 -right-8 w-[320px] h-[320px] rounded-full pointer-events-none -z-10 blur-3xl opacity-15"
+          className="absolute -top-12 -right-8 w-[340px] h-[340px] rounded-full pointer-events-none -z-10 blur-3xl opacity-15"
           style={{
             background: 'radial-gradient(circle, #EA580C 0%, rgba(234,88,12,0) 70%)',
           }}
         />
 
-        {/* Floating 3D Pro Live Card (Front Mode only) */}
+        {/* Floating Live Card Badge (Front Mode only) */}
         {!isFlipped && (
           <div
-            className="absolute -top-3 -left-4 sm:-left-7 z-30 bg-zinc-900/95 text-white backdrop-blur-xl px-3.5 py-2.5 rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.5)] border border-orange-500/30 flex items-center gap-3 transition-transform duration-300 pointer-events-none hidden sm:flex"
+            className="absolute -top-3 -left-4 sm:-left-8 z-30 bg-zinc-900/95 text-white backdrop-blur-xl px-4 py-2.5 rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.6)] border border-orange-500/30 flex items-center gap-3 transition-transform duration-300 pointer-events-none hidden sm:flex"
             style={{
               transform: `translate3d(${rotate.y * -1.2}px, ${rotate.x * -1.2}px, 25px)`,
             }}
           >
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center text-zinc-950 font-black shadow-md">
-              <Beer className="w-4.5 h-4.5 text-zinc-950" />
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center text-zinc-950 font-black shadow-md">
+              <Beer className="w-5 h-5 text-zinc-950" />
             </div>
             <div className="text-start">
               <p className="text-[10px] font-bold text-orange-400 uppercase tracking-wider">Masa Açıldı</p>
-              <p className="text-xs font-bold text-white">The Populist • 20:30</p>
+              <p className="text-xs font-bold text-white">Kadıköy • 20:30 (Masa 12)</p>
             </div>
           </div>
         )}
 
-        {/* 3D Phone Chassis Wrapper */}
+        {/* 3D Phone Body */}
         <div
-          className="relative w-[295px] sm:w-[315px] h-[595px] sm:h-[620px] transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
+          className="relative w-[300px] sm:w-[325px] h-[615px] sm:h-[640px] transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
           style={{
             transformStyle: 'preserve-3d',
             transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y + (isFlipped ? 180 : 0)}deg)`,
@@ -126,7 +127,7 @@ export const IPhone3D: React.FC<IPhone3DProps> = ({ t }) => {
           {/* FRONT FACE: SUNSET ORANGE TITANIUM IPHONE WITH OLED SCREEN */}
           {/* ========================================================================= */}
           <div
-            className="absolute inset-0 rounded-[48px] p-[2.5px] shadow-[0_30px_70px_-10px_rgba(0,0,0,0.7),0_15px_30px_-5px_rgba(0,0,0,0.4)]"
+            className="absolute inset-0 rounded-[48px] p-[2.5px] shadow-[0_30px_70px_-10px_rgba(0,0,0,0.8),0_15px_30px_-5px_rgba(0,0,0,0.5)]"
             style={{
               backfaceVisibility: 'hidden',
               transform: 'rotateY(0deg)',
@@ -137,22 +138,22 @@ export const IPhone3D: React.FC<IPhone3DProps> = ({ t }) => {
             {/* Metallic Specular Chamfer Highlight Ring */}
             <div className="absolute inset-0 rounded-[48px] ring-1 ring-inset ring-white/30 pointer-events-none" />
 
-            {/* Precision Antenna Slots (CNC Milled Lines) */}
+            {/* Precision Antenna Slots */}
             <div className="absolute -left-[3px] top-[75px] w-[3px] h-[3px] bg-[#7C2D12]" />
             <div className="absolute -left-[3px] bottom-[75px] w-[3px] h-[3px] bg-[#7C2D12]" />
             <div className="absolute -right-[3px] top-[75px] w-[3px] h-[3px] bg-[#7C2D12]" />
             <div className="absolute -right-[3px] bottom-[75px] w-[3px] h-[3px] bg-[#7C2D12]" />
 
             {/* Anodized Orange Side Buttons */}
-            <div className="absolute -left-[4px] top-[95px] w-[3.5px] h-[24px] bg-gradient-to-r from-[#9A3412] to-[#EA580C] rounded-l-[2px] shadow-sm" />
-            <div className="absolute -left-[4px] top-[135px] w-[3.5px] h-[46px] bg-gradient-to-r from-[#9A3412] to-[#EA580C] rounded-l-[2px] shadow-sm" />
-            <div className="absolute -left-[4px] top-[190px] w-[3.5px] h-[46px] bg-gradient-to-r from-[#9A3412] to-[#EA580C] rounded-l-[2px] shadow-sm" />
-            <div className="absolute -right-[4px] top-[140px] w-[3.5px] h-[60px] bg-gradient-to-l from-[#9A3412] to-[#EA580C] rounded-r-[2px] shadow-sm" />
+            <div className="absolute -left-[4px] top-[95px] w-[3.5px] h-[24px] bg-gradient-to-r from-[#9A3412] to-[#EA580C] rounded-l-[2px]" />
+            <div className="absolute -left-[4px] top-[135px] w-[3.5px] h-[46px] bg-gradient-to-r from-[#9A3412] to-[#EA580C] rounded-l-[2px]" />
+            <div className="absolute -left-[4px] top-[190px] w-[3.5px] h-[46px] bg-gradient-to-r from-[#9A3412] to-[#EA580C] rounded-l-[2px]" />
+            <div className="absolute -right-[4px] top-[140px] w-[3.5px] h-[60px] bg-gradient-to-l from-[#9A3412] to-[#EA580C] rounded-r-[2px]" />
 
             {/* Inner Black OLED Bezel */}
             <div className="w-full h-full rounded-[45.5px] bg-black p-[5.5px] overflow-hidden flex flex-col justify-between">
               
-              {/* Screen Display Glass Container */}
+              {/* Screen Display Container */}
               <div className="relative w-full h-full rounded-[40px] bg-[#09090B] text-white overflow-hidden flex flex-col font-sans">
                 
                 {/* Dynamic Island + Status Bar */}
@@ -162,7 +163,7 @@ export const IPhone3D: React.FC<IPhone3DProps> = ({ t }) => {
                   {/* Dynamic Island Pill */}
                   <div className="w-22 h-5 bg-black rounded-full flex items-center justify-between px-2.5 shadow-[inset_0_1px_2px_rgba(255,255,255,0.1)] border border-zinc-800/80">
                     <div className="w-2.5 h-2.5 rounded-full bg-[#050508] border border-zinc-700/60 flex items-center justify-center">
-                      <div className="w-1 h-1 rounded-full bg-blue-900/90" />
+                      <div className="w-1 h-1 rounded-full bg-blue-900" />
                     </div>
                     <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                   </div>
@@ -174,7 +175,7 @@ export const IPhone3D: React.FC<IPhone3DProps> = ({ t }) => {
                   </div>
                 </div>
 
-                {/* Craft Beer App UI */}
+                {/* Craft Beer App UI (Vertical Photography & Big User Avatars) */}
                 <div className="relative z-10 flex-1 px-3 py-1 space-y-2.5 overflow-y-auto custom-scrollbar text-start">
                   
                   {/* Top Header */}
@@ -193,38 +194,44 @@ export const IPhone3D: React.FC<IPhone3DProps> = ({ t }) => {
                     </span>
                   </div>
 
-                  {/* Atmospheric Pub Card */}
-                  <div className="relative rounded-2xl overflow-hidden border border-zinc-800/90 shadow-lg">
-                    <div className="relative h-28 w-full bg-zinc-900">
+                  {/* Vertical Beer-Drinking Friends Story Photo Card */}
+                  <div className="relative rounded-2xl overflow-hidden border border-zinc-800/90 shadow-xl">
+                    <div className="relative h-36 w-full bg-zinc-900">
+                      {/* Authentic Friends Drinking Beer Clinking Glasses */}
                       <img
-                        src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=800&auto=format&fit=crop"
-                        alt="Craft Pub"
-                        className="w-full h-full object-cover object-center brightness-[0.8]"
+                        src="https://images.unsplash.com/photo-1575037614876-c38a4d44f5b8?q=80&w=800&auto=format&fit=crop"
+                        alt="Friends Cheering with Beer"
+                        className="w-full h-full object-cover object-center brightness-[0.85] contrast-[1.05]"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/30 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
                       
-                      <div className="absolute top-2 right-2 flex items-center gap-1">
-                        <div className="w-6 h-6 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white/90">
-                          <Heart className="w-3 h-3 text-orange-400" />
+                      {/* Top Action Pills */}
+                      <div className="absolute top-2 right-2 flex items-center gap-1.5">
+                        <div className="w-7 h-7 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white/90">
+                          <Heart className="w-3.5 h-3.5 text-orange-400 fill-orange-400/30" />
                         </div>
-                        <div className="w-6 h-6 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white/90">
-                          <Share2 className="w-3 h-3 text-white" />
+                        <div className="w-7 h-7 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white/90">
+                          <Share2 className="w-3.5 h-3.5 text-white" />
                         </div>
                       </div>
 
+                      {/* Photo Bottom Caption */}
                       <div className="absolute bottom-2 left-2.5 right-2.5 flex items-end justify-between">
                         <div>
-                          <span className="text-[8px] font-black uppercase tracking-wider text-orange-400 bg-orange-950/90 px-1.5 py-0.5 rounded border border-orange-500/30">
-                            Craft Buluşması
+                          <span className="text-[8px] font-black uppercase tracking-wider text-orange-400 bg-orange-950/90 px-2 py-0.5 rounded-md border border-orange-500/30">
+                            Craft IPA & Pilsner Gecesi
                           </span>
                           <h3 className="text-xs font-black text-white leading-tight mt-1">
-                            The Populist • Kadıköy
+                            The Populist • Kadıköy Moda
                           </h3>
                         </div>
+                        <span className="text-[9px] font-black text-white bg-black/70 px-2 py-0.5 rounded-md border border-white/20">
+                          Masa 12
+                        </span>
                       </div>
                     </div>
 
-                    {/* Meta Row */}
+                    {/* Quick Meta Row */}
                     <div className="p-2 bg-zinc-900/95 flex items-center justify-between text-[10px] text-zinc-300 border-t border-zinc-800">
                       <div className="flex items-center gap-1">
                         <Calendar className="w-3 h-3 text-orange-400" />
@@ -232,121 +239,100 @@ export const IPhone3D: React.FC<IPhone3DProps> = ({ t }) => {
                       </div>
                       <div className="flex items-center gap-1 text-orange-400 font-bold">
                         <Navigation className="w-2.5 h-2.5" />
-                        <span>350m</span>
+                        <span>350m Yakında</span>
                       </div>
                     </div>
                   </div>
 
-                  {/* Sub Tabs */}
-                  <div className="flex rounded-xl bg-zinc-900/90 p-0.5 border border-zinc-800 text-[11px]">
-                    <button
-                      onClick={() => setActiveTab('attendees')}
-                      className={`flex-1 py-1 rounded-lg font-bold transition-all ${
-                        activeTab === 'attendees'
-                          ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-zinc-950 shadow'
-                          : 'text-zinc-400 hover:text-white'
-                      }`}
-                    >
-                      Masadaki Ekip (4/6)
-                    </button>
-                    <button
-                      onClick={() => setActiveTab('menu')}
-                      className={`flex-1 py-1 rounded-lg font-bold transition-all ${
-                        activeTab === 'menu'
-                          ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-zinc-950 shadow'
-                          : 'text-zinc-400 hover:text-white'
-                      }`}
-                    >
-                      🍺 Bira Menüsü
-                    </button>
-                  </div>
+                  {/* Large Prominent Friends/Attendees Section */}
+                  <div className="p-2.5 rounded-2xl bg-zinc-900/90 border border-zinc-800/90 space-y-2">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="font-extrabold text-white flex items-center gap-1.5">
+                        <Users className="w-3.5 h-3.5 text-orange-400" />
+                        <span>Masadaki Arkadaşlar (4/6)</span>
+                      </span>
+                      <span className="text-[9px] font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded-full border border-emerald-500/30">
+                        2 Yer Kaldı
+                      </span>
+                    </div>
 
-                  {/* Tab Content: Attendees */}
-                  {activeTab === 'attendees' && (
-                    <div className="space-y-1.5 text-[10px]">
-                      <div className="flex items-center justify-between p-1.5 rounded-xl bg-zinc-900/80 border border-zinc-800/80">
-                        <div className="flex items-center gap-1.5">
+                    {/* Big User Rows */}
+                    <div className="space-y-1.5">
+                      {/* User 1 */}
+                      <div className="flex items-center justify-between p-1.5 rounded-xl bg-zinc-950/60 border border-zinc-800/60">
+                        <div className="flex items-center gap-2.5">
                           <img
-                            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&auto=format&fit=crop&q=80"
-                            alt="Avatar"
-                            className="w-5 h-5 rounded-full object-cover border border-orange-500"
+                            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80"
+                            alt="Serkan Bilsel"
+                            className="w-8 h-8 rounded-full object-cover border-2 border-orange-500 shadow"
                           />
                           <div>
-                            <p className="font-bold text-white leading-tight">Serkan Bilsel</p>
-                            <p className="text-[8px] text-orange-400">Masa Kurucusu</p>
+                            <p className="text-xs font-extrabold text-white leading-tight">Serkan Bilsel</p>
+                            <p className="text-[9px] font-semibold text-orange-400">👑 Masa Kurucusu</p>
                           </div>
                         </div>
-                        <span className="text-[9px] font-bold text-emerald-400 bg-emerald-950/60 px-1.5 py-0.5 rounded-full border border-emerald-500/20">
+                        <span className="text-[9px] font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded-full border border-emerald-500/20">
                           Masada ✓
                         </span>
                       </div>
 
-                      <div className="flex items-center justify-between p-1.5 rounded-xl bg-zinc-900/80 border border-zinc-800/80">
-                        <div className="flex items-center gap-1.5">
+                      {/* User 2 */}
+                      <div className="flex items-center justify-between p-1.5 rounded-xl bg-zinc-950/60 border border-zinc-800/60">
+                        <div className="flex items-center gap-2.5">
                           <img
-                            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&auto=format&fit=crop&q=80"
-                            alt="Avatar"
-                            className="w-5 h-5 rounded-full object-cover border border-zinc-700"
+                            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80"
+                            alt="Mert Kaya"
+                            className="w-8 h-8 rounded-full object-cover border-2 border-zinc-700 shadow"
                           />
                           <div>
-                            <p className="font-bold text-zinc-200 leading-tight">Can & Mert</p>
-                            <p className="text-[8px] text-zinc-400">Yolda • 5 dk</p>
+                            <p className="text-xs font-extrabold text-zinc-200 leading-tight">Mert & Can</p>
+                            <p className="text-[9px] font-semibold text-zinc-400">⚡ Yolda • 5 dk</p>
                           </div>
                         </div>
-                        <span className="text-[9px] font-bold text-amber-400 bg-amber-950/60 px-1.5 py-0.5 rounded-full border border-amber-500/20">
+                        <span className="text-[9px] font-bold text-amber-400 bg-amber-950/60 px-2 py-0.5 rounded-full border border-amber-500/20">
                           Yolda
                         </span>
                       </div>
 
+                      {/* User 3 (Interactive Joined State) */}
                       {isJoined && (
-                        <div className="flex items-center justify-between p-1.5 rounded-xl bg-orange-500/15 border border-orange-500/40">
-                          <div className="flex items-center gap-1.5">
-                            <div className="w-5 h-5 rounded-full bg-gradient-to-r from-orange-500 to-amber-400 text-zinc-950 flex items-center justify-center font-black text-[9px]">
+                        <div className="flex items-center justify-between p-1.5 rounded-xl bg-orange-500/20 border border-orange-500/50 animate-fade-in">
+                          <div className="flex items-center gap-2.5">
+                            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-orange-500 to-amber-400 text-zinc-950 flex items-center justify-center font-black text-xs shadow">
                               SEN
                             </div>
                             <div>
-                              <p className="font-black text-orange-300 leading-tight">Masanın Parçasısın! 🎉</p>
-                              <p className="text-[8px] text-zinc-300">Yerin ayrıldı</p>
+                              <p className="text-xs font-black text-orange-300 leading-tight">Masaya Katıldın! 🍻</p>
+                              <p className="text-[9px] text-zinc-300">Sandalyen ayrıldı</p>
                             </div>
                           </div>
-                          <Check className="w-3.5 h-3.5 text-emerald-400" />
+                          <Check className="w-4 h-4 text-emerald-400" />
                         </div>
                       )}
                     </div>
-                  )}
+                  </div>
 
-                  {/* Tab Content: Beers */}
-                  {activeTab === 'menu' && (
-                    <div className="space-y-1.5 text-[10px]">
-                      <div className="p-1.5 rounded-xl bg-zinc-900/80 border border-zinc-800 flex items-center justify-between">
-                        <div>
-                          <p className="font-bold text-white">Citra Hazy IPA</p>
-                          <p className="text-[8px] text-zinc-400">Tropikal aromalar • %6.8 ABV</p>
-                        </div>
-                        <span className="text-[9px] font-black text-orange-400">★ 4.8</span>
-                      </div>
-                      <div className="p-1.5 rounded-xl bg-zinc-900/80 border border-zinc-800 flex items-center justify-between">
-                        <div>
-                          <p className="font-bold text-white">Belgian Dubbel</p>
-                          <p className="text-[8px] text-zinc-400">Karamel & İncir • %7.2 ABV</p>
-                        </div>
-                        <span className="text-[9px] font-black text-orange-400">★ 4.7</span>
-                      </div>
-                    </div>
-                  )}
+                  {/* Professional In-Screen Action CTAs */}
+                  <div className="space-y-1.5 pt-0.5">
+                    <button
+                      onClick={() => setIsJoined(!isJoined)}
+                      className={`w-full py-2.5 px-3 rounded-xl font-black text-xs flex items-center justify-center gap-2 shadow-xl transition-all active:scale-[0.98] ${
+                        isJoined
+                          ? 'bg-emerald-500 text-zinc-950 hover:bg-emerald-400 shadow-emerald-500/25'
+                          : 'bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 text-zinc-950 hover:brightness-110 shadow-orange-500/30'
+                      }`}
+                    >
+                      <Beer className="w-4 h-4" />
+                      <span>{isJoined ? 'Masadasın! (İptal Et)' : 'Masaya Katıl (Yerini Ayırt)'}</span>
+                    </button>
 
-                  {/* In-Screen Action CTA */}
-                  <button
-                    onClick={() => setIsJoined(!isJoined)}
-                    className={`w-full py-2 px-3 rounded-xl font-black text-xs flex items-center justify-center gap-2 shadow-lg transition-all active:scale-95 ${
-                      isJoined
-                        ? 'bg-emerald-500 text-zinc-950 hover:bg-emerald-400'
-                        : 'bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 text-zinc-950 hover:brightness-110'
-                    }`}
-                  >
-                    <Send className="w-3.5 h-3.5 rtl:scale-x-[-1]" />
-                    <span>{isJoined ? 'Masadasın! (İptal Et)' : 'Masaya Katıl / WhatsApp’tan Davet Et'}</span>
-                  </button>
+                    <button
+                      className="w-full py-2 px-3 rounded-xl font-bold text-[11px] flex items-center justify-center gap-2 bg-zinc-900/90 hover:bg-zinc-800 text-zinc-200 border border-zinc-700/80 shadow-md transition-all active:scale-[0.98]"
+                    >
+                      <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
+                      <span>WhatsApp’tan Arkadaş Davet Et</span>
+                    </button>
+                  </div>
                 </div>
 
                 {/* Bottom Home Bar */}
@@ -361,7 +347,7 @@ export const IPhone3D: React.FC<IPhone3DProps> = ({ t }) => {
           {/* BACK FACE: METALLIC ORANGE TITANIUM CHASSIS & 3D PRO CAMERA SYSTEM */}
           {/* ========================================================================= */}
           <div
-            className="absolute inset-0 rounded-[48px] p-[2.5px] shadow-[0_30px_70px_-10px_rgba(0,0,0,0.7),0_15px_30px_-5px_rgba(0,0,0,0.4)]"
+            className="absolute inset-0 rounded-[48px] p-[2.5px] shadow-[0_30px_70px_-10px_rgba(0,0,0,0.8),0_15px_30px_-5px_rgba(0,0,0,0.5)]"
             style={{
               backfaceVisibility: 'hidden',
               transform: 'rotateY(180deg)',
@@ -383,7 +369,7 @@ export const IPhone3D: React.FC<IPhone3DProps> = ({ t }) => {
               {/* Brushed Metallic Micro-Texture */}
               <div className="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-white/15 pointer-events-none" />
 
-              {/* 3D Elevated Camera Plateau (Sapphire Glass Island) */}
+              {/* 3D Elevated Camera Plateau */}
               <div className="relative z-10 w-32 h-32 rounded-[30px] bg-gradient-to-br from-[#EA580C]/90 via-[#C2410C]/80 to-[#7C2D12]/90 backdrop-blur-xl border border-orange-300/40 p-2.5 shadow-[0_12px_28px_rgba(0,0,0,0.45),inset_0_1px_1px_rgba(255,255,255,0.4)]">
                 
                 {/* Lens 1 - Top Left (48MP Wide) */}
@@ -429,7 +415,7 @@ export const IPhone3D: React.FC<IPhone3DProps> = ({ t }) => {
                 </svg>
               </div>
 
-              {/* Bottom Subtle Anodized Text */}
+              {/* Bottom Anodized Text */}
               <div className="relative z-10 text-center">
                 <p className="text-[9px] font-extrabold uppercase tracking-widest text-[#571F0C]">
                   Beer Together • Sunset Titanium
