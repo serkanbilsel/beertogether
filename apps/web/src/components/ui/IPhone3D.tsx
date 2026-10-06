@@ -11,8 +11,10 @@ import {
   Heart,
   Share2,
   Clock,
+  Sparkles,
+  ArrowUpRight,
   ChevronRight,
-  ShieldCheck,
+  Plus,
 } from 'lucide-react';
 
 interface IPhone3DProps {
@@ -22,6 +24,7 @@ interface IPhone3DProps {
 
 export const IPhone3D: React.FC<IPhone3DProps> = ({ t }) => {
   const [viewMode, setViewMode] = useState<'front' | 'back'>('front');
+  const [activeTab, setActiveTab] = useState<'upcoming' | 'recent'>('upcoming');
   const [rotate, setRotate] = useState({ x: 2, y: -2 });
   const [isJoined, setIsJoined] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -61,7 +64,7 @@ export const IPhone3D: React.FC<IPhone3DProps> = ({ t }) => {
                 : 'text-zinc-400 hover:text-white'
             }`}
           >
-            Ön Ekran (iOS Arayüzü)
+            Ön Ekran (Bento UI)
           </button>
           <button
             onClick={() => setViewMode('back')}
@@ -85,8 +88,8 @@ export const IPhone3D: React.FC<IPhone3DProps> = ({ t }) => {
         style={{ perspective: '1600px' }}
       >
         {/* Physical Studio Contact Floor Shadow */}
-        <div className="absolute -bottom-8 w-[320px] h-[36px] bg-black/50 rounded-[100%] blur-2xl pointer-events-none -z-10" />
-        <div className="absolute -bottom-5 w-[240px] h-[20px] bg-black/70 rounded-[100%] blur-md pointer-events-none -z-10" />
+        <div className="absolute -bottom-8 w-[320px] h-[36px] bg-black/45 rounded-[100%] blur-2xl pointer-events-none -z-10" />
+        <div className="absolute -bottom-5 w-[240px] h-[20px] bg-black/65 rounded-[100%] blur-md pointer-events-none -z-10" />
 
         {/* 3D Phone Body */}
         <div
@@ -97,7 +100,7 @@ export const IPhone3D: React.FC<IPhone3DProps> = ({ t }) => {
           }}
         >
           {/* ========================================================================= */}
-          {/* FRONT FACE: METALLIC SUNSET ORANGE TITANIUM WITH CRISP LIGHT MODE SCREEN */}
+          {/* FRONT FACE: METALLIC SUNSET ORANGE TITANIUM WITH DRIBBLE BENTO UI */}
           {/* ========================================================================= */}
           <div
             className="absolute inset-0 rounded-[52px] p-[2.5px] shadow-[0_30px_70px_-10px_rgba(0,0,0,0.65),0_15px_30px_-5px_rgba(0,0,0,0.4)]"
@@ -126,12 +129,12 @@ export const IPhone3D: React.FC<IPhone3DProps> = ({ t }) => {
             {/* Inner Black Bezel (Uniform 2mm) */}
             <div className="w-full h-full rounded-[49.5px] bg-black p-[5.5px] overflow-hidden flex flex-col justify-between">
               
-              {/* Ultra-Clean Apple iOS Light Screen */}
-              <div className="relative w-full h-full rounded-[44px] bg-[#F8F9FA] text-zinc-900 overflow-hidden flex flex-col font-sans">
+              {/* Dribbble Style Modern App UI Canvas (Warm Light & Playful Modern Cards) */}
+              <div className="relative w-full h-full rounded-[44px] bg-[#FDFCFB] text-zinc-900 overflow-hidden flex flex-col font-sans">
                 
-                {/* Dynamic Island + Status Bar */}
-                <div className="relative z-20 pt-2.5 px-6 pb-1.5 flex items-center justify-between text-xs font-semibold text-zinc-900 select-none">
-                  <span className="tracking-tight font-bold">20:00</span>
+                {/* Dynamic Island + iOS Status Bar */}
+                <div className="relative z-20 pt-2.5 px-6 pb-1 flex items-center justify-between text-xs font-semibold text-zinc-900 select-none">
+                  <span className="tracking-tight font-extrabold text-[11px]">20:30</span>
                   
                   {/* Dynamic Island Pill */}
                   <div className="w-26 h-5.5 bg-black rounded-full flex items-center justify-between px-3 shadow-inner">
@@ -142,160 +145,236 @@ export const IPhone3D: React.FC<IPhone3DProps> = ({ t }) => {
                   </div>
 
                   <div className="flex items-center gap-1.5">
-                    <span className="text-[10px] font-bold text-zinc-500">5G</span>
+                    <span className="text-[10px] font-bold text-zinc-600">5G</span>
                     <div className="w-4.5 h-2.5 border border-zinc-900 rounded-[2px] p-[0.5px]">
                       <div className="h-full w-3 bg-zinc-900 rounded-[1px]" />
                     </div>
                   </div>
                 </div>
 
-                {/* App Screen Content (Light Theme iOS Design) */}
-                <div className="relative z-10 flex-1 px-4 py-1.5 space-y-3 overflow-y-auto text-start">
+                {/* App Screen Body */}
+                <div className="relative z-10 flex-1 px-4 py-2 space-y-3 overflow-y-auto text-start custom-scrollbar">
                   
-                  {/* Top Header */}
+                  {/* Top Bar: "Hello, Serkan" + Profile Avatar (Referans Görseldeki Üst Kısım) */}
                   <div className="flex items-center justify-between pt-0.5">
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shadow-md">
-                        <Beer className="w-4.5 h-4.5 text-zinc-950" />
+                    <div>
+                      <p className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider">
+                        İyi Akşamlar 👋
+                      </p>
+                      <h2 className="text-xl font-black text-zinc-950 tracking-tight leading-tight">
+                        Hello, <span className="text-orange-600">Serkan</span>
+                      </h2>
+                    </div>
+
+                    <div className="relative">
+                      <div className="w-11 h-11 rounded-2xl bg-amber-100 p-0.5 shadow-sm border border-amber-200">
+                        <img
+                          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80"
+                          alt="Profile"
+                          className="w-full h-full rounded-[14px] object-cover"
+                        />
+                      </div>
+                      <div className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-orange-500 border-2 border-white flex items-center justify-center">
+                        <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Top Bento Widgets Row (Referans Görseldeki Sol Siyah Kutu + Sağ Haftalık Çubuklar) */}
+                  <div className="grid grid-cols-12 gap-2.5">
+                    
+                    {/* Widget 1: Dark Contrast Pill/Card (Referans Görseldeki Siyah Boxing -21$ Kutusu) */}
+                    <div className="col-span-5 rounded-[22px] bg-[#18181B] text-white p-3 flex flex-col justify-between shadow-md">
+                      <div>
+                        <div className="inline-flex items-center gap-1 text-[9px] font-bold text-amber-400 uppercase tracking-wider bg-white/10 px-2 py-0.5 rounded-full">
+                          <Beer className="w-2.5 h-2.5" /> Plan
+                        </div>
+                        <p className="text-xs font-black text-white mt-1.5 leading-tight">
+                          Craft Beer
+                        </p>
+                        <p className="text-[9px] text-zinc-400">Bu Akşam</p>
+                      </div>
+
+                      <div className="pt-2 flex items-baseline justify-between border-t border-white/10 mt-1">
+                        <span className="text-xs font-black text-amber-400">20:30</span>
+                        <span className="text-[9px] font-bold text-zinc-400">Moda</span>
+                      </div>
+                    </div>
+
+                    {/* Widget 2: Weekly Buluşma Tracker / Gradient Bar (Referans Görseldeki Renkli Çubuklar) */}
+                    <div className="col-span-7 rounded-[22px] bg-white border border-zinc-200/80 p-3 flex flex-col justify-between shadow-[0_4px_12px_rgba(0,0,0,0.03)]">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-extrabold text-zinc-900">
+                          Haftalık Buluşmalar
+                        </span>
+                        <span className="text-[9px] font-bold text-orange-600 bg-orange-50 px-1.5 py-0.5 rounded-md">
+                          3/4
+                        </span>
+                      </div>
+
+                      {/* Mini Bar Graph (Su, Mo, Tu, We, Th, Fr, Sa) */}
+                      <div className="flex items-end justify-between gap-1 pt-2">
+                        {[
+                          { day: 'Pt', height: 'h-4', active: false },
+                          { day: 'Sa', height: 'h-6', active: false },
+                          { day: 'Ça', height: 'h-5', active: false },
+                          { day: 'Pe', height: 'h-8', active: false },
+                          { day: 'Cu', height: 'h-11', active: true },
+                          { day: 'Ct', height: 'h-9', active: false },
+                          { day: 'Pz', height: 'h-3', active: false },
+                        ].map((item, idx) => (
+                          <div key={idx} className="flex flex-col items-center gap-1 flex-1">
+                            <div
+                              className={`w-full rounded-full transition-all ${
+                                item.active
+                                  ? 'bg-gradient-to-t from-orange-500 to-amber-400 shadow-sm'
+                                  : 'bg-zinc-100'
+                              } ${item.height}`}
+                            />
+                            <span
+                              className={`text-[8px] font-bold ${
+                                item.active ? 'text-orange-600' : 'text-zinc-400'
+                              }`}
+                            >
+                              {item.day}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Filter Pills (Referans Görseldeki "Upcoming" / "Recently" Kapsülü) */}
+                  <div className="flex items-center gap-2 pt-0.5">
+                    <button
+                      onClick={() => setActiveTab('upcoming')}
+                      className={`px-3.5 py-1.5 rounded-full text-[11px] font-extrabold transition-all ${
+                        activeTab === 'upcoming'
+                          ? 'bg-[#18181B] text-white shadow-sm'
+                          : 'bg-zinc-100 text-zinc-500 hover:text-zinc-900'
+                      }`}
+                    >
+                      Buluşmalar (Yaklaşan)
+                    </button>
+                    <button
+                      onClick={() => setActiveTab('recent')}
+                      className={`px-3.5 py-1.5 rounded-full text-[11px] font-extrabold transition-all ${
+                        activeTab === 'recent'
+                          ? 'bg-[#18181B] text-white shadow-sm'
+                          : 'bg-zinc-100 text-zinc-500 hover:text-zinc-900'
+                      }`}
+                    >
+                      Geçmiş Anılar
+                    </button>
+                  </div>
+
+                  {/* Main Event Card (Referans Görseldeki Sarı & Pembe Büyük Kart Tasarımı) */}
+                  <div className="relative rounded-[28px] overflow-hidden bg-gradient-to-br from-[#FEF08A] via-[#FDE047] to-[#FACC15] p-3.5 shadow-[0_12px_24px_rgba(234,179,8,0.25)] border border-amber-300">
+                    
+                    {/* Top Meta Chips */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-1.5">
+                        <span className="px-2.5 py-1 rounded-full bg-[#18181B] text-white text-[9px] font-black uppercase tracking-wider">
+                          Kadıköy
+                        </span>
+                        <span className="px-2 py-1 rounded-full bg-white/90 text-zinc-900 text-[9px] font-black shadow-sm">
+                          ★ 4.9
+                        </span>
+                      </div>
+
+                      {/* Overlapping User Avatars (Referans Görseldeki +6k avatarları) */}
+                      <div className="flex items-center -space-x-2">
+                        <img
+                          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80"
+                          alt="User"
+                          className="w-6 h-6 rounded-full border-2 border-white object-cover shadow"
+                        />
+                        <img
+                          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80"
+                          alt="User"
+                          className="w-6 h-6 rounded-full border-2 border-white object-cover shadow"
+                        />
+                        <div className="w-6 h-6 rounded-full bg-zinc-900 text-amber-300 font-extrabold text-[8px] flex items-center justify-center border-2 border-white shadow">
+                          +4
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Event Heading */}
+                    <div className="pt-2">
+                      <p className="text-[10px] font-bold text-zinc-700">Today, 20:00 • Cuma</p>
+                      <h3 className="text-base font-black text-zinc-950 leading-tight">
+                        Craft Beer Night
+                      </h3>
+                      <p className="text-[11px] font-extrabold text-zinc-800">
+                        The Populist • Belfast Pub
+                      </p>
+                    </div>
+
+                    {/* Authentic Friends Clinking Beer Image (Cutout style in card) */}
+                    <div className="relative my-2 h-28 rounded-2xl overflow-hidden shadow-md border border-white/60">
+                      <img
+                        src="https://images.unsplash.com/photo-1575037614876-c38a4d44f5b8?q=80&w=800&auto=format&fit=crop"
+                        alt="Friends Drinking Beer"
+                        className="w-full h-full object-cover object-center"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      
+                      <div className="absolute bottom-2 left-2.5 text-white">
+                        <p className="text-[10px] font-black leading-none">Mert, Can & 2 Arkadaş</p>
+                        <p className="text-[8px] text-amber-300 font-semibold">Masa Ayrıldı • 20:00</p>
+                      </div>
+                    </div>
+
+                    {/* Bottom Floating White Price/Action Pills (Referans Görseldeki $7 / Group workout Kapsülleri) */}
+                    <div className="grid grid-cols-2 gap-2 pt-1">
+                      <div className="rounded-xl bg-white/95 p-2 shadow-sm border border-white/80 flex flex-col justify-between">
+                        <span className="text-[9px] font-bold text-zinc-500">Mekan</span>
+                        <span className="text-xs font-black text-zinc-900 truncate">The Populist</span>
+                      </div>
+
+                      <button
+                        onClick={() => setIsJoined(!isJoined)}
+                        className={`rounded-xl p-2 font-black text-xs flex items-center justify-center gap-1.5 shadow-md transition-all active:scale-95 ${
+                          isJoined
+                            ? 'bg-emerald-600 text-white'
+                            : 'bg-[#18181B] text-white hover:bg-black'
+                        }`}
+                      >
+                        {isJoined ? (
+                          <>
+                            <Check className="w-3.5 h-3.5" />
+                            <span>Katıldın!</span>
+                          </>
+                        ) : (
+                          <>
+                            <Send className="w-3.5 h-3.5 text-amber-400" />
+                            <span>Davet Et</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Secondary Activity Card (Referans Görseldeki Alttaki Yoga Session Kartı) */}
+                  <div className="rounded-2xl bg-white border border-zinc-200/80 p-3 shadow-sm flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-orange-400 to-amber-500 flex items-center justify-center text-white shadow-sm font-black text-sm">
+                        🍺
                       </div>
                       <div>
-                        <h4 className="text-sm font-extrabold tracking-tight leading-none text-zinc-900">
-                          Beer Together
-                        </h4>
-                        <p className="text-[10px] text-zinc-500 font-medium mt-0.5">
-                          Buluşma Planı
+                        <p className="text-xs font-extrabold text-zinc-900 leading-tight">
+                          Gelecek Hafta: IPA Tadımı
+                        </p>
+                        <p className="text-[10px] font-semibold text-zinc-500">
+                          Cumartesi, 19:30 • 3 Arkadaş
                         </p>
                       </div>
                     </div>
 
-                    <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200 flex items-center gap-1">
-                      <ShieldCheck className="w-3 h-3 text-emerald-600" /> Onaylandı
+                    <span className="text-[10px] font-black text-orange-600 bg-orange-50 px-2.5 py-1 rounded-full border border-orange-100">
+                      19:30
                     </span>
-                  </div>
-
-                  {/* Vertical Beer-Drinking Friends Story Photo Card */}
-                  <div className="relative rounded-2xl overflow-hidden shadow-[0_8px_20px_rgba(0,0,0,0.08)] border border-zinc-200/80 bg-white">
-                    <div className="relative h-44 w-full bg-zinc-100">
-                      {/* Authentic Friends Clinking Beer Glasses */}
-                      <img
-                        src="https://images.unsplash.com/photo-1575037614876-c38a4d44f5b8?q=80&w=800&auto=format&fit=crop"
-                        alt="Friends Cheering with Beer"
-                        className="w-full h-full object-cover object-center"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                      
-                      {/* Top Action Pills */}
-                      <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5">
-                        <div className="w-7 h-7 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center text-white shadow">
-                          <Heart className="w-3.5 h-3.5 text-orange-400 fill-orange-400" />
-                        </div>
-                        <div className="w-7 h-7 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center text-white shadow">
-                          <Share2 className="w-3.5 h-3.5" />
-                        </div>
-                      </div>
-
-                      {/* Photo Bottom Caption */}
-                      <div className="absolute bottom-2.5 left-3 right-3 flex items-end justify-between text-white">
-                        <div>
-                          <span className="text-[9px] font-bold uppercase tracking-wider text-amber-300 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded">
-                            Haftalık Buluşma
-                          </span>
-                          <h3 className="text-sm font-extrabold leading-tight mt-1">
-                            Belfast Irish Pub • Kadıköy
-                          </h3>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Venue & Time Row */}
-                    <div className="p-3 bg-white flex items-center justify-between text-xs text-zinc-700">
-                      <div className="flex items-center gap-1.5 font-semibold text-zinc-900">
-                        <Calendar className="w-4 h-4 text-amber-600" />
-                        <span>Cuma, 20:00</span>
-                      </div>
-                      <div className="flex items-center gap-1 text-zinc-500 font-medium text-[11px]">
-                        <MapPin className="w-3.5 h-3.5 text-orange-500" />
-                        <span>Moda Cad. No: 24</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Friends & Participants Section (Clean iOS Card) */}
-                  <div className="p-3.5 rounded-2xl bg-white border border-zinc-200/80 shadow-[0_4px_12px_rgba(0,0,0,0.04)] space-y-2.5">
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="font-extrabold text-zinc-900">
-                        Kimler Geliyor (2/2)
-                      </span>
-                      <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
-                        Kabul Edildi
-                      </span>
-                    </div>
-
-                    {/* User Rows */}
-                    <div className="space-y-2">
-                      {/* User 1: You */}
-                      <div className="flex items-center justify-between p-2 rounded-xl bg-zinc-50 border border-zinc-100">
-                        <div className="flex items-center gap-3">
-                          <img
-                            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80"
-                            alt="Sen"
-                            className="w-9 h-9 rounded-full object-cover border-2 border-amber-500 shadow-sm"
-                          />
-                          <div>
-                            <p className="text-xs font-bold text-zinc-900 leading-tight">Sen</p>
-                            <p className="text-[10px] font-medium text-zinc-500">Davet Eden</p>
-                          </div>
-                        </div>
-                        <div className="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
-                          <Check className="w-3.5 h-3.5 stroke-[3]" />
-                        </div>
-                      </div>
-
-                      {/* User 2: Friend */}
-                      <div className="flex items-center justify-between p-2 rounded-xl bg-zinc-50 border border-zinc-100">
-                        <div className="flex items-center gap-3">
-                          <img
-                            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80"
-                            alt="Arkadaşın"
-                            className="w-9 h-9 rounded-full object-cover border-2 border-zinc-300 shadow-sm"
-                          />
-                          <div>
-                            <p className="text-xs font-bold text-zinc-900 leading-tight">Mert Kaya</p>
-                            <p className="text-[10px] font-medium text-emerald-600">Katılıyor</p>
-                          </div>
-                        </div>
-                        <div className="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
-                          <Check className="w-3.5 h-3.5 stroke-[3]" />
-                        </div>
-                      </div>
-
-                      {/* Joined Feedback */}
-                      {isJoined && (
-                        <div className="flex items-center justify-between p-2 rounded-xl bg-amber-50 border border-amber-200 animate-fade-in">
-                          <div className="flex items-center gap-3">
-                            <div className="w-9 h-9 rounded-full bg-amber-500 text-white flex items-center justify-center font-extrabold text-xs shadow-sm">
-                              🍻
-                            </div>
-                            <div>
-                              <p className="text-xs font-bold text-amber-900 leading-tight">WhatsApp Daveti Gönderildi</p>
-                              <p className="text-[10px] text-amber-700">Bağlantı panoya kopyalandı</p>
-                            </div>
-                          </div>
-                          <Check className="w-4 h-4 text-emerald-600" />
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Primary CTA Button (Sleek Apple iOS Style) */}
-                  <div className="pt-1">
-                    <button
-                      onClick={() => setIsJoined(!isJoined)}
-                      className="w-full py-3.5 px-4 rounded-xl font-bold text-xs flex items-center justify-center gap-2 bg-[#18181B] hover:bg-black text-white shadow-lg shadow-black/15 transition-all active:scale-[0.98]"
-                    >
-                      <Send className="w-3.5 h-3.5 text-amber-400 rtl:scale-x-[-1]" />
-                      <span>{isJoined ? 'Davet Gönderildi (Tekrarla)' : 'WhatsApp’tan Davet Et'}</span>
-                    </button>
                   </div>
                 </div>
 
