@@ -15,7 +15,7 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({ t }) => {
       title: t.how.step1Title,
       desc: t.how.step1Desc,
       snippet: (
-        <div className="p-3.5 rounded-[var(--radius-md)] bg-[#10131F] border border-[#1F2438] text-xs space-y-2">
+        <div className="p-3 rounded-[var(--radius-md)] bg-[var(--surface-2)] border border-[var(--border)] text-xs space-y-2">
           <div className="flex items-center justify-between text-[var(--ink)] font-semibold">
             <span>{t.snippets.when}</span>
             <span className="text-[var(--accent-text)] text-[10px] font-bold">{t.snippets.inviteSent}</span>
@@ -32,7 +32,7 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({ t }) => {
       title: t.how.step2Title,
       desc: t.how.step2Desc,
       snippet: (
-        <div className="p-3.5 rounded-[var(--radius-md)] bg-[#10131F] border border-[#1F2438] text-xs space-y-2">
+        <div className="p-3 rounded-[var(--radius-md)] bg-[var(--surface-2)] border border-[var(--border)] text-xs space-y-2">
           <div className="flex items-center gap-1.5 text-[var(--ink)] font-semibold">
             <Clock className="w-3.5 h-3.5 text-[var(--accent)]" />
             <span>{t.snippets.reminder}</span>
@@ -49,7 +49,7 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({ t }) => {
       title: t.how.step3Title,
       desc: t.how.step3Desc,
       snippet: (
-        <div className="p-3.5 rounded-[var(--radius-md)] bg-[#10131F] border border-[#1F2438] text-xs space-y-2">
+        <div className="p-3 rounded-[var(--radius-md)] bg-[var(--surface-2)] border border-[var(--border)] text-xs space-y-2">
           <div className="flex items-center gap-1.5 text-[var(--ink)] font-semibold">
             <Camera className="w-3.5 h-3.5 text-[var(--accent)]" />
             <span>{t.snippets.photoAdded}</span>
@@ -64,24 +64,24 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({ t }) => {
   ];
 
   return (
-    <section id="how" className="section-padding relative" aria-labelledby="how-heading">
+    <section id="how" className="section-padding bg-[var(--surface-2)]/50" aria-labelledby="how-heading">
       <div className="container-main">
-        <div className="text-start max-w-2xl mb-14">
+        <div className="text-start max-w-2xl mb-12">
           <Eyebrow>{t.how.eyebrow}</Eyebrow>
-          <h2 id="how-heading" className="display-h2 text-[var(--ink)]">
+          <h2 id="how-heading" className="display-h2">
             {t.how.h2}
           </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {steps.map((step) => (
-            <Card key={step.num} hoverable className="flex flex-col justify-between text-start group">
+            <Card key={step.num} hoverable className="flex flex-col justify-between text-start">
               <div>
-                <div className="font-display font-black text-4xl md:text-5xl text-[var(--accent)] mb-4 tabular tracking-tight opacity-90 group-hover:scale-105 transition-transform origin-left">
+                <div className="font-sans font-extrabold text-3xl md:text-4xl text-[var(--accent-text)] mb-3 tabular tracking-tight">
                   {step.num}
                 </div>
-                <h3 className="display-h3 text-[var(--ink)] mb-2.5">{step.title}</h3>
-                <p className="text-body text-sm text-slate-400 mb-6">{step.desc}</p>
+                <h3 className="display-h3 mb-2">{step.title}</h3>
+                <p className="text-body text-sm mb-6">{step.desc}</p>
               </div>
               <div className="mt-auto">{step.snippet}</div>
             </Card>

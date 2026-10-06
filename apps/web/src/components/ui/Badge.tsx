@@ -6,7 +6,7 @@ export const Badge: React.FC<{ children: React.ReactNode; className?: string }> 
 }) => {
   return (
     <span
-      className={`inline-flex items-center px-3 py-1 rounded-[var(--radius-pill)] bg-[var(--accent-soft)] border border-[var(--accent)]/30 text-[var(--accent-text)] text-[12px] font-display font-bold tracking-wide leading-normal shadow-[0_0_12px_rgba(255,179,0,0.15)] ${className}`}
+      className={`inline-flex items-center px-2.5 py-0.5 rounded-[var(--radius-pill)] bg-[var(--accent-soft)] text-[var(--accent-text)] text-[11px] font-semibold tracking-wide leading-normal ${className}`}
     >
       {children}
     </span>

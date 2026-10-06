@@ -15,35 +15,32 @@ export const PhoneFrame: React.FC<PhoneFrameProps> = ({
     <div
       role="region"
       aria-label={ariaLabel}
-      className={`relative w-full max-w-[320px] sm:max-w-[360px] mx-auto rounded-[42px] bg-[#000000] p-[10px] shadow-[0_30px_100px_-15px_rgba(0,0,0,0.9),0_0_0_1px_rgba(255,179,0,0.25),0_0_40px_-10px_rgba(255,179,0,0.2)] ${className}`}
+      className={`relative w-full max-w-[310px] sm:max-w-[340px] mx-auto rounded-[40px] bg-[#18181B] p-[9px] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.18),0_0_0_1px_rgba(0,0,0,0.08)] ${className}`}
       style={{ aspectRatio: '9/18.5' }}
     >
-      {/* Glossy edge highlight */}
-      <div className="absolute inset-0 rounded-[42px] pointer-events-none border border-white/10" />
-
       {/* Side buttons */}
-      <div className="absolute -inset-inline-start-[12px] top-[90px] w-[3px] h-[26px] bg-[#232736] rounded-s-sm" />
-      <div className="absolute -inset-inline-start-[12px] top-[125px] w-[3px] h-[40px] bg-[#232736] rounded-s-sm" />
-      <div className="absolute -inset-inline-start-[12px] top-[175px] w-[3px] h-[40px] bg-[#232736] rounded-s-sm" />
-      <div className="absolute -inset-inline-end-[12px] top-[110px] w-[3px] h-[55px] bg-[#232736] rounded-e-sm" />
+      <div className="absolute -inset-inline-start-[11px] top-[80px] w-[3px] h-[24px] bg-[#27272A] rounded-s-sm" />
+      <div className="absolute -inset-inline-start-[11px] top-[115px] w-[3px] h-[36px] bg-[#27272A] rounded-s-sm" />
+      <div className="absolute -inset-inline-start-[11px] top-[160px] w-[3px] h-[36px] bg-[#27272A] rounded-s-sm" />
+      <div className="absolute -inset-inline-end-[11px] top-[100px] w-[3px] h-[48px] bg-[#27272A] rounded-e-sm" />
 
       {/* Inner Screen */}
-      <div className="relative w-full h-full rounded-[34px] bg-[#08090D] overflow-hidden flex flex-col text-[var(--ink)] shadow-inner">
+      <div className="relative w-full h-full rounded-[32px] bg-[#FAFAF9] overflow-hidden flex flex-col text-[var(--ink)]">
         {/* Dynamic Island Notch */}
-        <div className="w-full pt-3 pb-2 px-6 flex items-center justify-between z-20 select-none border-b border-[#1F2438]/50 bg-[#08090D]">
-          <span className="text-[12px] font-bold text-white tabular">20:42</span>
-          <div className="w-20 h-4 rounded-full bg-[#000000] flex items-center justify-end px-2 border border-white/5">
-            <div className="w-2 h-2 rounded-full bg-[#111420]" />
+        <div className="w-full pt-3 pb-2 px-5 flex items-center justify-between z-20 select-none bg-[#FAFAF9] border-b border-[var(--border)]">
+          <span className="text-[11px] font-semibold text-[var(--ink)] tabular">20:42</span>
+          <div className="w-18 h-3.5 rounded-full bg-[#18181B] flex items-center justify-end px-1.5">
+            <div className="w-1.5 h-1.5 rounded-full bg-[#27272A]" />
           </div>
-          <div className="flex items-center gap-1.5">
-            <div className="w-4 h-2.5 rounded-[3px] border border-white/60 p-[1px] flex items-center">
-              <div className="w-2 h-full bg-white rounded-[1px]" />
+          <div className="flex items-center gap-1">
+            <div className="w-3.5 h-2 rounded-[2px] border border-[var(--ink)] p-[0.5px] flex items-center">
+              <div className="w-1.5 h-full bg-[var(--ink)] rounded-[0.5px]" />
             </div>
           </div>
         </div>
 
         {/* Screen Content */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-3">
+        <div className="flex-1 overflow-y-auto p-3.5 space-y-3">
           {children}
         </div>
       </div>

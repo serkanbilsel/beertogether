@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from './Card';
 import { Badge } from './Badge';
-import { Calendar, Users, ShieldCheck, MapPin } from 'lucide-react';
+import { Calendar, Users, ShieldCheck } from 'lucide-react';
 import { TranslationType } from '@/lib/translations/en';
 
 interface EventCardProps {
@@ -27,15 +27,15 @@ export const EventCard: React.FC<EventCardProps> = ({
     : (t?.snippets?.private || 'Private');
 
   return (
-    <Card hoverable className={`max-w-md w-full border-[#1F2438] bg-[#0C0E17]/90 ${className}`}>
+    <Card hoverable className={`max-w-md w-full ${className}`}>
       {/* Example proof photo container */}
-      <div className="relative aspect-[4/3] w-full rounded-[var(--radius-md)] bg-gradient-to-br from-[#121626] to-[#0A0C14] border border-[#1F2438] overflow-hidden mb-5 flex items-center justify-center">
-        <div className="text-center p-6 space-y-2">
-          <div className="w-12 h-12 mx-auto rounded-full bg-[var(--accent-soft)] border border-[var(--accent)]/30 text-[var(--accent-text)] flex items-center justify-center shadow-[0_0_20px_rgba(255,179,0,0.2)]">
-            <ShieldCheck className="w-6 h-6 text-[var(--accent-text)]" />
+      <div className="relative aspect-[4/3] w-full rounded-[var(--radius-md)] bg-[var(--surface-2)] border border-[var(--border)] overflow-hidden mb-4 flex items-center justify-center">
+        <div className="text-center p-4 space-y-1.5">
+          <div className="w-10 h-10 mx-auto rounded-full bg-[var(--accent-soft)] text-[var(--accent-text)] flex items-center justify-center">
+            <ShieldCheck className="w-5 h-5 text-[var(--accent-text)]" />
           </div>
-          <div className="text-sm font-bold text-white tracking-wide">{proofLabel}</div>
-          <div className="text-[11px] text-slate-400">150 m GPS Verified Check-in</div>
+          <div className="text-xs font-semibold text-[var(--ink)]">{proofLabel}</div>
+          <div className="text-[11px] text-[var(--ink-3)]">150m GPS verified</div>
         </div>
 
         <div className="absolute top-3 end-3">
@@ -44,19 +44,19 @@ export const EventCard: React.FC<EventCardProps> = ({
       </div>
 
       {/* Details */}
-      <div className="space-y-3 text-start">
-        <div className="font-display font-extrabold text-xl text-white tracking-tight">
+      <div className="space-y-2 text-start">
+        <div className="font-sans font-bold text-lg text-[var(--ink)]">
           {venueName}
         </div>
 
-        <div className="flex items-center gap-5 text-xs text-slate-400">
+        <div className="flex items-center gap-4 text-xs text-[var(--ink-2)]">
           <div className="flex items-center gap-1.5">
-            <Calendar className="w-4 h-4 text-[var(--accent)]" />
+            <Calendar className="w-4 h-4 text-[var(--accent-text)]" />
             <span className="tabular">{dateTime}</span>
           </div>
 
           <div className="flex items-center gap-1.5">
-            <Users className="w-4 h-4 text-[var(--accent)]" />
+            <Users className="w-4 h-4 text-[var(--accent-text)]" />
             <span>{participantsCount}</span>
           </div>
         </div>

@@ -78,60 +78,57 @@ export default function PublicEventPage({ params, searchParams }: Props) {
   };
 
   return (
-    <div className="min-h-screen bg-[#05060A] text-white p-6 md:p-12 relative overflow-hidden">
+    <div className="min-h-screen bg-[var(--bg)] text-[var(--ink)] p-6 md:p-12">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Ambient background glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[var(--accent)]/10 blur-[150px] pointer-events-none rounded-full" />
-
-      <div className="container-narrow relative z-10">
+      <div className="container-narrow">
         <a
           href="/"
-          className="inline-flex items-center gap-2 text-xs font-display font-bold text-[var(--accent)] hover:underline mb-8"
+          className="inline-flex items-center gap-2 text-xs font-semibold text-[var(--accent-text)] hover:underline mb-8"
         >
           <ArrowLeft className="w-4 h-4 rtl:scale-x-[-1]" />
           <span>{t.event.back}</span>
         </a>
 
-        <Card className="p-6 sm:p-10 space-y-7 border-[#1F2438] bg-[#0C0E17]/90 shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
+        <Card className="p-6 sm:p-10 space-y-6 shadow-md">
           {/* 4:3 Proof photo placeholder */}
-          <div className="relative aspect-[4/3] w-full rounded-[var(--radius-lg)] bg-gradient-to-br from-[#121626] to-[#0A0C14] border border-[#1F2438] overflow-hidden flex items-center justify-center text-center p-6">
-            <div>
-              <div className="w-14 h-14 mx-auto rounded-full bg-[var(--accent-soft)] border border-[var(--accent)]/30 text-[var(--accent-text)] flex items-center justify-center mb-3 shadow-[0_0_24px_rgba(255,179,0,0.25)]">
-                <ShieldCheck className="w-7 h-7" />
+          <div className="relative aspect-[4/3] w-full rounded-[var(--radius-lg)] bg-[var(--surface-2)] border border-[var(--border)] overflow-hidden flex items-center justify-center text-center p-6">
+            <div className="space-y-2">
+              <div className="w-12 h-12 mx-auto rounded-full bg-[var(--accent-soft)] text-[var(--accent-text)] flex items-center justify-center">
+                <ShieldCheck className="w-6 h-6" />
               </div>
-              <div className="font-display font-bold text-base text-white">{t.public.proofPhoto}</div>
-              <div className="text-xs text-slate-400 mt-1">150 m GPS Verified Check-in</div>
+              <div className="font-bold text-base text-[var(--ink)]">{t.public.proofPhoto}</div>
+              <div className="text-xs text-[var(--ink-3)]">150 m GPS Verified Check-in</div>
             </div>
           </div>
 
-          <div className="space-y-4 text-start">
+          <div className="space-y-3 text-start">
             <Badge>{t.event.publicBadge}</Badge>
-            <h1 className="display-h2 text-white">{event.title}</h1>
+            <h1 className="display-h2">{event.title}</h1>
 
-            <div className="p-4.5 rounded-[var(--radius-md)] bg-[#10131F] border border-[#1F2438] space-y-2.5 text-xs text-slate-300">
-              <div className="flex items-center gap-2.5 font-semibold text-white">
-                <MapPin className="w-4 h-4 text-[var(--accent)] shrink-0" />
+            <div className="p-4 rounded-[var(--radius-md)] bg-[var(--surface-2)] border border-[var(--border)] space-y-2 text-xs text-[var(--ink-2)]">
+              <div className="flex items-center gap-2 font-semibold text-[var(--ink)]">
+                <MapPin className="w-4 h-4 text-[var(--accent-text)] shrink-0" />
                 <span>{event.venue} — {event.address}</span>
               </div>
-              <div className="flex items-center gap-2.5">
-                <Calendar className="w-4 h-4 text-[var(--accent)] shrink-0" />
-                <span className="tabular font-medium">{event.dateFormatted}</span>
+              <div className="flex items-center gap-2">
+                <Calendar className="w-4 h-4 text-[var(--accent-text)] shrink-0" />
+                <span className="tabular">{event.dateFormatted}</span>
               </div>
-              <div className="flex items-center gap-2.5">
-                <Users className="w-4 h-4 text-[var(--accent)] shrink-0" />
+              <div className="flex items-center gap-2">
+                <Users className="w-4 h-4 text-[var(--accent-text)] shrink-0" />
                 <span>{t.event.joined.replace('{names}', event.participants.join(' & '))}</span>
               </div>
             </div>
           </div>
 
           {/* Plan your own block */}
-          <div className="pt-6 border-t border-[#1F2438] text-center space-y-4">
-            <h2 className="display-h3 text-white">{t.public.planYours}</h2>
-            <div className="flex flex-wrap items-center justify-center gap-4">
+          <div className="pt-6 border-t border-[var(--border)] text-center space-y-4">
+            <h2 className="display-h3">{t.public.planYours}</h2>
+            <div className="flex flex-wrap items-center justify-center gap-3">
               <StoreBadge platform="apple" t={t} />
               <StoreBadge platform="google" t={t} />
             </div>

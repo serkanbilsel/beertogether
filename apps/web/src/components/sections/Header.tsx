@@ -5,7 +5,7 @@ import { TranslationType } from '@/lib/translations/en';
 import { Locale } from '@/lib/translations';
 import { LanguageSwitcher } from '../ui/LanguageSwitcher';
 import { Button } from '../ui/Button';
-import { Menu, X, Sparkles } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 interface HeaderProps {
   t: TranslationType;
@@ -25,7 +25,6 @@ export const Header: React.FC<HeaderProps> = ({ t, locale, onLocaleChange }) => 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on Esc and prevent background scroll
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setMobileMenuOpen(false);
@@ -49,9 +48,9 @@ export const Header: React.FC<HeaderProps> = ({ t, locale, onLocaleChange }) => 
       </a>
 
       <header
-        className={`sticky top-0 z-40 w-full h-[76px] transition-all duration-[var(--dur-fast)] ${
+        className={`sticky top-0 z-40 w-full h-[68px] transition-all duration-[var(--dur-fast)] ${
           isScrolled
-            ? 'bg-[#05060A]/85 backdrop-blur-xl border-b border-[#1F2438] shadow-[0_4px_30px_rgba(0,0,0,0.5)]'
+            ? 'bg-[#FAFAF9]/90 backdrop-blur-md border-b border-[var(--border)] shadow-sm'
             : 'bg-transparent'
         }`}
       >
@@ -60,34 +59,34 @@ export const Header: React.FC<HeaderProps> = ({ t, locale, onLocaleChange }) => 
           <a
             href="#"
             aria-label={t.a11y.home}
-            className="flex items-center gap-3 font-display font-extrabold text-xl tracking-tight text-[#FFFFFF] group"
+            className="flex items-center gap-2.5 font-sans font-bold text-lg text-[var(--ink)]"
           >
-            <div className="w-9 h-9 rounded-[var(--radius-md)] bg-gradient-to-br from-[#FFB300] to-[#FF8F00] text-[#05060A] flex items-center justify-center font-black shadow-[0_0_20px_rgba(255,179,0,0.35)] group-hover:scale-105 transition-transform">
+            <div className="w-8 h-8 rounded-[var(--radius-sm)] bg-[var(--accent)] text-[var(--accent-ink)] flex items-center justify-center font-bold text-sm shadow-sm">
               BT
             </div>
-            <span className="bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">
+            <span className="tracking-tight">
               Beer Together
             </span>
           </a>
 
           {/* Desktop Nav Links (≥ 1024px) */}
-          <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-[var(--ink-2)]" aria-label={t.a11y.mainNav}>
-            <a href="#how" className="hover:text-[#FFFFFF] hover:scale-105 transition-all duration-[var(--dur-fast)]">
+          <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-[var(--ink-2)]" aria-label={t.a11y.mainNav}>
+            <a href="#how" className="hover:text-[var(--ink)] transition-colors">
               {t.nav.howItWorks}
             </a>
-            <a href="#features" className="hover:text-[#FFFFFF] hover:scale-105 transition-all duration-[var(--dur-fast)]">
+            <a href="#features" className="hover:text-[var(--ink)] transition-colors">
               {t.nav.features}
             </a>
-            <a href="#safety" className="hover:text-[#FFFFFF] hover:scale-105 transition-all duration-[var(--dur-fast)]">
+            <a href="#safety" className="hover:text-[var(--ink)] transition-colors">
               {t.nav.safety}
             </a>
-            <a href="#faq" className="hover:text-[#FFFFFF] hover:scale-105 transition-all duration-[var(--dur-fast)]">
+            <a href="#faq" className="hover:text-[var(--ink)] transition-colors">
               {t.nav.faq}
             </a>
           </nav>
 
           {/* Desktop Right Actions */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-3">
             <LanguageSwitcher currentLocale={locale} onSelectLocale={onLocaleChange} ariaLabel={t.a11y.language} />
             <Button size="sm" asLink href="#download">
               {t.nav.getApp}
@@ -95,12 +94,12 @@ export const Header: React.FC<HeaderProps> = ({ t, locale, onLocaleChange }) => 
           </div>
 
           {/* Mobile Hamburger Button (< 1024px) */}
-          <div className="flex lg:hidden items-center gap-2.5">
+          <div className="flex lg:hidden items-center gap-2">
             <LanguageSwitcher currentLocale={locale} onSelectLocale={onLocaleChange} ariaLabel={t.a11y.language} />
             <button
               onClick={() => setMobileMenuOpen(true)}
               aria-label={t.nav.menu}
-              className="p-2.5 rounded-[var(--radius-md)] text-[var(--ink)] border border-[var(--border)] bg-[#0C0E17] hover:bg-[#131624] focus:outline-none"
+              className="p-2 rounded-[var(--radius-sm)] text-[var(--ink)] border border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-2)] focus:outline-none"
             >
               <Menu className="w-5 h-5" />
             </button>
@@ -114,12 +113,12 @@ export const Header: React.FC<HeaderProps> = ({ t, locale, onLocaleChange }) => 
           role="dialog"
           aria-modal="true"
           aria-label={t.nav.menu}
-          className="fixed inset-0 z-50 bg-[#05060A]/95 backdrop-blur-2xl p-6 flex flex-col justify-between"
+          className="fixed inset-0 z-50 bg-[#FAFAF9] p-6 flex flex-col justify-between"
         >
           <div>
             <div className="flex items-center justify-between pb-6 border-b border-[var(--border)]">
-              <div className="flex items-center gap-2.5 font-display font-bold text-lg text-white">
-                <div className="w-8 h-8 rounded-[var(--radius-sm)] bg-[var(--accent)] text-[#05060A] flex items-center justify-center font-bold">
+              <div className="flex items-center gap-2.5 font-bold text-lg text-[var(--ink)]">
+                <div className="w-8 h-8 rounded-[var(--radius-sm)] bg-[var(--accent)] text-[var(--accent-ink)] flex items-center justify-center font-bold">
                   BT
                 </div>
                 <span>Beer Together</span>
@@ -127,38 +126,38 @@ export const Header: React.FC<HeaderProps> = ({ t, locale, onLocaleChange }) => 
               <button
                 onClick={() => setMobileMenuOpen(false)}
                 aria-label={t.nav.close}
-                className="p-2.5 rounded-[var(--radius-md)] border border-[var(--border)] text-[var(--ink)] bg-[#0C0E17] hover:bg-[#131624] focus:outline-none"
+                className="p-2 rounded-[var(--radius-sm)] border border-[var(--border)] text-[var(--ink)] bg-[var(--surface)] hover:bg-[var(--surface-2)] focus:outline-none"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <nav className="flex flex-col gap-6 pt-8 text-xl font-display font-bold text-[var(--ink)] text-start" aria-label={t.a11y.mainNav}>
+            <nav className="flex flex-col gap-5 pt-8 text-lg font-semibold text-[var(--ink)] text-start" aria-label={t.a11y.mainNav}>
               <a
                 href="#how"
                 onClick={() => setMobileMenuOpen(false)}
-                className="hover:text-[var(--accent)] transition-colors"
+                className="hover:text-[var(--accent-text)]"
               >
                 {t.nav.howItWorks}
               </a>
               <a
                 href="#features"
                 onClick={() => setMobileMenuOpen(false)}
-                className="hover:text-[var(--accent)] transition-colors"
+                className="hover:text-[var(--accent-text)]"
               >
                 {t.nav.features}
               </a>
               <a
                 href="#safety"
                 onClick={() => setMobileMenuOpen(false)}
-                className="hover:text-[var(--accent)] transition-colors"
+                className="hover:text-[var(--accent-text)]"
               >
                 {t.nav.safety}
               </a>
               <a
                 href="#faq"
                 onClick={() => setMobileMenuOpen(false)}
-                className="hover:text-[var(--accent)] transition-colors"
+                className="hover:text-[var(--accent-text)]"
               >
                 {t.nav.faq}
               </a>
