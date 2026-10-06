@@ -100,6 +100,9 @@ export const ja: TranslationType = {
     time: '金曜日 · 20:00',
     participants: '2人参加',
     planYours: 'Beer Together で計画する',
+    verifiedMeetup: '認証済みミートアップ',
+    locationSnippet: 'モダ地区 · 150m GPS認証',
+    eventTitle: '金曜夜のベルファスト',
   },
   trust: {
     h2: '本物の友達のために作られました。',

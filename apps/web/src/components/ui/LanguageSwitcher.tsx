@@ -32,20 +32,24 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
         {ariaLabel}
       </label>
       <div className="relative flex items-center">
-        <Globe className="w-4 h-4 text-[var(--ink-2)] absolute start-3 pointer-events-none" />
+        <Globe className="w-3.5 h-3.5 text-[var(--ink-2)] absolute start-3 pointer-events-none stroke-[1.75]" />
         <select
           id="language-select"
           value={currentLocale}
           onChange={(e) => onSelectLocale(e.target.value as Locale)}
-          className="appearance-none h-[40px] ps-9 pe-8 rounded-[var(--radius-md)] bg-[var(--surface)] text-[var(--ink)] text-xs font-semibold border border-[var(--border)] hover:bg-[var(--surface-2)] shadow-sm transition-all duration-[var(--dur-fast)] cursor-pointer focus:outline-none"
+          className="appearance-none h-[40px] ps-8 pe-7 rounded-full bg-[var(--surface-2)] hover:bg-[var(--surface)] text-[var(--ink)] text-xs font-semibold border border-[var(--border)] transition-all duration-[var(--dur-fast)] cursor-pointer focus:outline-none"
         >
           {LANGUAGES.map((lang) => (
-            <option key={lang.code} value={lang.code} className="bg-white text-zinc-900">
+            <option
+              key={lang.code}
+              value={lang.code}
+              className="bg-[var(--surface)] text-[var(--ink)]"
+            >
               {lang.name}
             </option>
           ))}
         </select>
-        <ChevronDown className="w-3.5 h-3.5 text-[var(--ink-3)] absolute end-2.5 pointer-events-none" />
+        <ChevronDown className="w-3 h-3 text-[var(--ink-3)] absolute end-2.5 pointer-events-none" />
       </div>
     </div>
   );

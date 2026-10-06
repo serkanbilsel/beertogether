@@ -23,7 +23,7 @@ export const FeaturesBento: React.FC<FeaturesBentoProps> = ({ t }) => {
           <Card hoverable className="md:col-span-2 lg:col-span-2 flex flex-col justify-between">
             <div className="max-w-md">
               <div className="w-10 h-10 rounded-[var(--radius-md)] bg-[var(--accent-soft)] text-[var(--accent-text)] flex items-center justify-center mb-4">
-                <Share2 className="w-5 h-5 stroke-[2]" />
+                <Share2 className="w-6 h-6 stroke-[1.5]" />
               </div>
               <h3 className="display-h3 mb-2">{t.features.f1Title}</h3>
               <p className="text-body text-sm">{t.features.f1Desc}</p>
@@ -33,7 +33,7 @@ export const FeaturesBento: React.FC<FeaturesBentoProps> = ({ t }) => {
             <div className="mt-6 p-4 rounded-[var(--radius-md)] bg-[var(--surface-2)] border border-[var(--border)] space-y-2">
               <div className="flex items-center justify-between text-xs text-[var(--ink-2)]">
                 <span className="font-semibold text-[var(--ink)]">{t.snippets.linkReady}</span>
-                <span className="text-[10px] text-[var(--success)] font-bold bg-[#16A34A]/10 px-2 py-0.5 rounded-full">Universal Link</span>
+                <span className="text-[10px] text-[var(--accent-text)] font-bold bg-[var(--accent-soft)] px-2 py-0.5 rounded-full">Universal Link</span>
               </div>
               <div className="p-3 rounded-[var(--radius-sm)] bg-[var(--surface)] border border-[var(--border)] text-xs text-[var(--ink)] font-medium leading-relaxed">
                 <span>{t.snippets.waMessage}</span>
@@ -46,7 +46,7 @@ export const FeaturesBento: React.FC<FeaturesBentoProps> = ({ t }) => {
           <Card hoverable className="flex flex-col justify-between">
             <div>
               <div className="w-10 h-10 rounded-[var(--radius-md)] bg-[var(--accent-soft)] text-[var(--accent-text)] flex items-center justify-center mb-4">
-                <Bell className="w-5 h-5 stroke-[2]" />
+                <Bell className="w-6 h-6 stroke-[1.5]" />
               </div>
               <h3 className="display-h3 mb-2">{t.features.f2Title}</h3>
               <p className="text-body text-sm">{t.features.f2Desc}</p>
@@ -68,7 +68,7 @@ export const FeaturesBento: React.FC<FeaturesBentoProps> = ({ t }) => {
           <Card hoverable className="flex flex-col justify-between">
             <div>
               <div className="w-10 h-10 rounded-[var(--radius-md)] bg-[var(--accent-soft)] text-[var(--accent-text)] flex items-center justify-center mb-4">
-                <Camera className="w-5 h-5 stroke-[2]" />
+                <Camera className="w-6 h-6 stroke-[1.5]" />
               </div>
               <h3 className="display-h3 mb-2">{t.features.f3Title}</h3>
               <p className="text-body text-sm">{t.features.f3Desc}</p>
@@ -77,7 +77,7 @@ export const FeaturesBento: React.FC<FeaturesBentoProps> = ({ t }) => {
             {/* Proof snippet */}
             <div className="mt-6 p-3 rounded-[var(--radius-md)] bg-[var(--surface-2)] border border-[var(--border)] flex items-center justify-between text-xs">
               <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-[var(--success)]" />
+                <ShieldCheck className="w-4 h-4 text-[var(--success)] stroke-[1.5]" />
                 <span className="font-semibold text-[var(--ink)]">{t.snippets.checkedIn}</span>
               </div>
               <span className="text-[10px] font-bold text-[var(--accent-text)] bg-[var(--accent-soft)] px-2 py-0.5 rounded">
@@ -90,7 +90,7 @@ export const FeaturesBento: React.FC<FeaturesBentoProps> = ({ t }) => {
           <Card hoverable className="flex flex-col justify-between">
             <div>
               <div className="w-10 h-10 rounded-[var(--radius-md)] bg-[var(--accent-soft)] text-[var(--accent-text)] flex items-center justify-center mb-4">
-                <MapPin className="w-5 h-5 stroke-[2]" />
+                <MapPin className="w-6 h-6 stroke-[1.5]" />
               </div>
               <h3 className="display-h3 mb-2">{t.features.f4Title}</h3>
               <p className="text-body text-sm">{t.features.f4Desc}</p>
@@ -109,7 +109,7 @@ export const FeaturesBento: React.FC<FeaturesBentoProps> = ({ t }) => {
           <Card hoverable className="flex flex-col justify-between">
             <div>
               <div className="w-10 h-10 rounded-[var(--radius-md)] bg-[var(--accent-soft)] text-[var(--accent-text)] flex items-center justify-center mb-4">
-                <Lock className="w-5 h-5 stroke-[2]" />
+                <Lock className="w-6 h-6 stroke-[1.5]" />
               </div>
               <h3 className="display-h3 mb-2">{t.features.f5Title}</h3>
               <p className="text-body text-sm">{t.features.f5Desc}</p>
@@ -118,10 +118,10 @@ export const FeaturesBento: React.FC<FeaturesBentoProps> = ({ t }) => {
             {/* Privacy toggle chip */}
             <div className="mt-6 p-3 rounded-[var(--radius-md)] bg-[var(--surface-2)] border border-[var(--border)] text-xs flex items-center justify-between font-semibold">
               <div className="flex items-center gap-1.5 text-[var(--ink)]">
-                <Globe className="w-3.5 h-3.5 text-[var(--accent-text)]" />
+                <Globe className="w-3.5 h-3.5 text-[var(--accent-text)] stroke-[1.5]" />
                 <span>{t.snippets.private} / {t.snippets.public}</span>
               </div>
-              <span className="text-[10px] text-[var(--success)] font-bold bg-[#16A34A]/10 px-2 py-0.5 rounded-full">RLS</span>
+              <span className="text-[10px] text-[var(--accent-text)] font-bold bg-[var(--accent-soft)] px-2 py-0.5 rounded-full">RLS</span>
             </div>
           </Card>
 
@@ -129,7 +129,7 @@ export const FeaturesBento: React.FC<FeaturesBentoProps> = ({ t }) => {
           <Card hoverable className="md:col-span-2 lg:col-span-3 flex flex-col justify-between">
             <div className="max-w-md">
               <div className="w-10 h-10 rounded-[var(--radius-md)] bg-[var(--accent-soft)] text-[var(--accent-text)] flex items-center justify-center mb-4">
-                <Layers className="w-5 h-5 stroke-[2]" />
+                <Layers className="w-6 h-6 stroke-[1.5]" />
               </div>
               <h3 className="display-h3 mb-2">{t.features.f6Title}</h3>
               <p className="text-body text-sm">{t.features.f6Desc}</p>

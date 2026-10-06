@@ -20,7 +20,7 @@ export const Card: React.FC<CardProps> = ({
   const bg = surface2 ? 'bg-[var(--surface-2)]' : 'bg-[var(--surface)]';
 
   const hover = hoverable
-    ? 'hover:border-[#D4D4D8] hover:shadow-[var(--shadow-md)] hover:-translate-y-0.5'
+    ? 'hover:border-[var(--ink-3)] hover:shadow-[var(--shadow-md)] hover:-translate-y-0.5'
     : '';
 
   return (

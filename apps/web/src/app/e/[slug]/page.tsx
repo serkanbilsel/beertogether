@@ -6,6 +6,8 @@ import { StoreBadge } from '@/components/ui/StoreBadge';
 import { MapPin, Calendar, Users, ShieldCheck, ArrowLeft } from 'lucide-react';
 import { getTranslation } from '@/lib/translations';
 
+export const dynamic = 'force-dynamic';
+
 interface Props {
   params: {
     slug: string;

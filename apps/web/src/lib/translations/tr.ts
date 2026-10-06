@@ -2,7 +2,7 @@ import { TranslationType } from './en';
 
 export const tr: TranslationType = {
   meta: {
-    title: 'Beer Together — Sözler değil, arkadaşlarla gerçek planlar',
+    title: 'Beer Together — İyi niyetler soğuk biraya dönüşsün',
     description:
       'Beer Together iyi niyetleri gerçek planlara dönüştürür. Bir arkadaşını davet et, mekan seç, buluş ve anıyı kaydet.',
   },
@@ -24,10 +24,10 @@ export const tr: TranslationType = {
     close: 'Kapat',
   },
   hero: {
-    eyebrow: 'Masada Yerin Hazır 🍻',
-    h1: 'WhatsApp’ta kaybolan planlara son. Masaya toplanıyoruz.',
-    lead: '“Haftaya kesin buluşalım” deyip aylarca görüşmediğin arkadaşlarına tek tıkla canlı masa daveti at. Mekanı seç, ekibi topla, anın tadını çıkar.',
-    micro: 'Ücretsiz · Yalnızca 18+ · Reklamsız & Gizlilik Odaklı',
+    eyebrow: 'Sözler değil, planlar',
+    h1: '“Haftaya kesin buluşalım” deyip ertelemeye son. Daha çok şerefe.',
+    lead: 'Beer Together iyi niyetleri gerçek planlara dönüştürür. Bir arkadaşını davet et, mekan seç, buluş ve anıyı kaydet.',
+    micro: 'Ücretsiz · Yalnızca 18+ · Reklamsız',
     appStore: 'App Store’dan İndirin',
     googlePlay: 'Google Play’den Alın',
   },
@@ -100,6 +100,9 @@ export const tr: TranslationType = {
     time: 'Cuma · 20:00',
     participants: '2 kişi katıldı',
     planYours: 'Beer Together ile kendi buluşmanı planla',
+    verifiedMeetup: 'Doğrulanmış buluşma',
+    locationSnippet: 'Moda · 150m GPS onaylı',
+    eventTitle: 'Cuma Gecesi Belfast',
   },
   trust: {
     h2: 'Gerçek arkadaşlar için tasarlandı.',

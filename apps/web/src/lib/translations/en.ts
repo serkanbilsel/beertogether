@@ -1,6 +1,6 @@
 export const en = {
   meta: {
-    title: 'Beer Together — Plans with friends, not promises',
+    title: 'Beer Together — Turn good intentions into cold pints',
     description:
       'Beer Together turns good intentions into real plans. Invite a friend, pick a spot, show up, and keep the memory.',
   },
@@ -22,10 +22,10 @@ export const en = {
     close: 'Close',
   },
   hero: {
-    eyebrow: 'Your table is ready 🍻',
-    h1: 'No more plans lost in chats. Gather at the table.',
-    lead: 'Stop saying “we should grab a beer soon” and actually make it happen. Pick a craft spot, send an instant tap invite, and celebrate real moments.',
-    micro: 'Free · 18+ only · No ads & Privacy focused',
+    eyebrow: 'Plans, not promises',
+    h1: 'Less “we should hang out.” More cheers.',
+    lead: 'Beer Together turns good intentions into real plans. Invite a friend, pick a spot, show up, and keep the memory.',
+    micro: 'Free · 18+ only · No ads',
     appStore: 'Download on the App Store',
     googlePlay: 'Get it on Google Play',
   },
@@ -98,6 +98,9 @@ export const en = {
     time: 'Friday · 20:00',
     participants: '2 joined',
     planYours: 'Plan your own with Beer Together',
+    verifiedMeetup: 'Verified meetup',
+    locationSnippet: 'Moda · 150m GPS verified',
+    eventTitle: 'Friday night Belfast',
   },
   trust: {
     h2: 'Built for real friends.',

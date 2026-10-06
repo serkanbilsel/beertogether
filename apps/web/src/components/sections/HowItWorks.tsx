@@ -64,11 +64,11 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({ t }) => {
   ];
 
   return (
-    <section id="how" className="section-padding bg-[var(--surface-2)]/50" aria-labelledby="how-heading">
+    <section id="how" className="section-padding bg-[var(--surface-2)]" aria-labelledby="how-heading">
       <div className="container-main">
         <div className="text-start max-w-2xl mb-12">
           <Eyebrow>{t.how.eyebrow}</Eyebrow>
-          <h2 id="how-heading" className="display-h2">
+          <h2 id="how-heading" className="display-h2 text-[var(--ink)]">
             {t.how.h2}
           </h2>
         </div>

@@ -3,45 +3,45 @@
 @tailwind utilities;
 
 :root {
-  /* Surfaces - Clean, Apple-grade Warm Light Canvas */
-  --bg:            #FAFAF9;
+  /* Yüzeyler */
+  --bg:            #FAF8F5;
   --surface:       #FFFFFF;
-  --surface-2:     #F4F4F5;
-  --border:        #E4E4E7;
+  --surface-2:     #F3EFE9;   /* hafif ayrışan bölümler */
+  --border:        #E7E1D8;
 
-  /* Text - High Legibility Crisp Charcoal */
-  --ink:           #18181B;
-  --ink-2:         #52525B;
-  --ink-3:         #A1A1AA;
+  /* Metin */
+  --ink:           #1A1612;   /* başlık + gövde */
+  --ink-2:         #5C544B;   /* ikincil metin (AA ≥ 7:1 zeminde) */
+  --ink-3:         #8A8176;   /* yardımcı metin, sadece büyük/dekoratif */
 
-  /* Accent: Refined Craft Amber / Golden Brew */
-  --accent:        #F59E0B;
-  --accent-hover:  #D97706;
-  --accent-ink:    #18181B;
-  --accent-text:   #B45309;
-  --accent-soft:   #FEF3C7;
+  /* Vurgu: kehribar */
+  --accent:        #E8A33D;   /* buton dolgusu, vurgular */
+  --accent-hover:  #D8922A;
+  --accent-ink:    #1A1612;   /* kehribar üstündeki metin (≈8:1) */
+  --accent-text:   #8F5A0F;   /* kehribar renkli METİN/link (≈5.4:1) */
+  --accent-soft:   #FBEBD0;   /* rozet/arka plan tonu */
 
-  /* Dark surfaces for contrast sections & footer */
-  --dark-bg:       #18181B;
-  --dark-surface:  #27272A;
-  --dark-ink:      #FAFAFA;
-  --dark-ink-2:    #A1A1AA;
+  /* Koyu yüzey (CTA bandı, footer) */
+  --dark-bg:       #14110E;
+  --dark-surface:  #1F1B16;
+  --dark-ink:      #F5F1EA;
+  --dark-ink-2:    #B8AFA2;
 
-  /* Status */
-  --success:       #16A34A;
-  --focus-ring:    #18181B;
+  /* Durum */
+  --success:       #2E7D4F;
+  --focus-ring:    #1A1612;
 
-  /* Shapes */
+  /* Şekil */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 20px;
   --radius-xl: 28px;
   --radius-pill: 999px;
 
-  /* Shadows - Soft, diffused multi-layered */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 16px -2px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  --shadow-lg: 0 20px 40px -12px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  /* Gölge (yumuşak, çok katmanlı; asla siyah ağır gölge değil) */
+  --shadow-sm: 0 1px 2px rgba(26,22,18,.06);
+  --shadow-md: 0 1px 2px rgba(26,22,18,.05), 0 8px 24px -12px rgba(26,22,18,.18);
+  --shadow-lg: 0 2px 4px rgba(26,22,18,.05), 0 24px 48px -20px rgba(26,22,18,.28);
 
   /* Spacing */
   --space-2: 8px;
@@ -49,41 +49,63 @@
   --space-6: 24px;
   --space-8: 32px;
   --space-12: 48px;
-  --section-y: clamp(72px, 8vw, 120px);
+  --section-y: clamp(72px, 9vw, 128px);
 
   /* Transitions */
   --dur-fast: 150ms;
   --dur-base: 250ms;
-  --dur-slow: 400ms;
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-slow: 500ms;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
 }
 
-html.dark, :root.dark, .dark {
-  --bg:            #09090B;
-  --surface:       #141417;
-  --surface-2:     #202025;
-  --border:        #27272A;
+html.light, [data-theme="light"], :root[data-theme="light"], html:not(.dark):not([data-theme="dark"]) {
+  --bg:            #FAF8F5 !important;
+  --surface:       #FFFFFF !important;
+  --surface-2:     #F3EFE9 !important;
+  --border:        #E7E1D8 !important;
 
-  --ink:           #FAFAFA;
-  --ink-2:         #A1A1AA;
-  --ink-3:         #71717A;
+  --ink:           #1A1612 !important;
+  --ink-2:         #5C544B !important;
+  --ink-3:         #8A8176 !important;
 
-  --accent:        #F59E0B;
-  --accent-hover:  #D97706;
-  --accent-ink:    #09090B;
-  --accent-text:   #FBBF24;
-  --accent-soft:   rgba(245, 158, 11, 0.18);
+  --accent:        #E8A33D !important;
+  --accent-hover:  #D8922A !important;
+  --accent-ink:    #1A1612 !important;
+  --accent-text:   #8F5A0F !important;
+  --accent-soft:   #FBEBD0 !important;
 
-  --dark-bg:       #09090B;
-  --dark-surface:  #18181B;
-  --dark-ink:      #FAFAFA;
-  --dark-ink-2:    #A1A1AA;
+  --dark-bg:       #14110E !important;
+  --dark-surface:  #1F1B16 !important;
+  --dark-ink:      #F5F1EA !important;
+  --dark-ink-2:    #B8AFA2 !important;
 
-  --focus-ring:    #F59E0B;
+  --success:       #2E7D4F !important;
+  --focus-ring:    #1A1612 !important;
+}
 
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 16px -2px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 20px 40px -12px rgba(0, 0, 0, 0.7);
+html.dark, :root.dark, :root[data-theme="dark"], [data-theme="dark"], .dark {
+  --bg:            #0F0D0B !important;
+  --surface:       #1A1713 !important;
+  --surface-2:     #221E19 !important;
+  --border:        #2E2822 !important;
+
+  --ink:           #F5F1EA !important;
+  --ink-2:         #B8AFA2 !important;
+  --ink-3:         #8A8176 !important;
+
+  --accent:        #E8A33D !important;
+  --accent-hover:  #D8922A !important;
+  --accent-ink:    #1A1612 !important;
+  --accent-text:   #F0B65A !important;
+  --accent-soft:   #3A2B12 !important;
+
+  --dark-bg:       #0F0D0B !important;
+  --dark-surface:  #1A1713 !important;
+  --dark-ink:      #F5F1EA !important;
+  --dark-ink-2:    #B8AFA2 !important;
+
+  --success:       #4CC38A !important;
+  --focus-ring:    #F5F1EA !important;
 }
 
 * {
@@ -91,11 +113,17 @@ html.dark, :root.dark, .dark {
 }
 
 body {
+  font-family: var(--font-sans), system-ui, sans-serif;
   background-color: var(--bg);
   color: var(--ink);
-  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11', 'ss01';
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-display {
+  font-family: var(--font-display), -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
 }
 
 /* Skip link */
@@ -123,68 +151,68 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   outline-offset: 2px !important;
 }
 
-/* Clean, crisp typography */
+/* Typography styles per Section 3 with Plus Jakarta Sans / Apple SF Pro */
 .display-h1 {
-  font-family: var(--font-display), var(--font-sans), sans-serif;
-  font-size: clamp(2.5rem, 1.8rem + 3.2vw, 4.25rem);
-  line-height: 1.08;
+  font-family: var(--font-display), -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  font-size: clamp(2.5rem, 1.2rem + 5.2vw, 4.75rem);
+  line-height: 1.04;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+  color: var(--ink);
+}
+
+.display-h2 {
+  font-family: var(--font-display), -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  font-size: clamp(1.875rem, 1.1rem + 2.8vw, 3.25rem);
+  line-height: 1.1;
   font-weight: 800;
   letter-spacing: -0.035em;
   text-wrap: balance;
   color: var(--ink);
 }
 
-.display-h2 {
-  font-family: var(--font-display), var(--font-sans), sans-serif;
-  font-size: clamp(1.85rem, 1.4rem + 1.8vw, 2.75rem);
-  line-height: 1.15;
+.display-h3 {
+  font-family: var(--font-display), -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  font-size: clamp(1.25rem, 1rem + 0.9vw, 1.625rem);
+  line-height: 1.25;
   font-weight: 700;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
   text-wrap: balance;
   color: var(--ink);
 }
 
-.display-h3 {
-  font-family: var(--font-display), var(--font-sans), sans-serif;
-  font-size: clamp(1.15rem, 1rem + 0.5vw, 1.45rem);
-  line-height: 1.3;
-  font-weight: 600;
-  letter-spacing: -0.015em;
-  color: var(--ink);
-}
-
 .text-lead {
-  font-size: clamp(1.05rem, 0.95rem + 0.3vw, 1.25rem);
-  line-height: 1.6;
+  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  line-height: 1.55;
   font-weight: 400;
   color: var(--ink-2);
-  max-width: 58ch;
+  max-width: 65ch;
   text-wrap: pretty;
 }
 
 .text-body {
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 1.0625rem; /* 17px */
+  line-height: 1.65;
   font-weight: 400;
   color: var(--ink-2);
-  max-width: 60ch;
+  max-width: 65ch;
   text-wrap: pretty;
 }
 
 .text-caption {
-  font-size: 0.875rem;
+  font-size: 0.875rem; /* 14px */
   line-height: 1.5;
   font-weight: 500;
+  letter-spacing: 0.01em;
   color: var(--ink-3);
 }
 
 .eyebrow {
-  font-family: var(--font-sans), sans-serif;
-  font-size: 0.8125rem;
-  line-height: 1.3;
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.35;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
   color: var(--accent-text);
 }
 
@@ -207,21 +235,38 @@ html[dir="rtl"] .display-h3 {
   padding-block: var(--section-y);
 }
 
+/* Wide, fluid, breathing container */
 .container-main {
-  max-width: 1160px;
+  width: 100%;
+  max-width: 1380px;
   margin-inline: auto;
-  padding-inline: 24px;
+  padding-inline: 20px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .container-main {
     padding-inline: 32px;
   }
 }
 
+@media (min-width: 1024px) {
+  .container-main {
+    padding-inline: 48px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container-main {
+    max-width: 1440px;
+    padding-inline: 64px;
+  }
+}
+
 .container-narrow {
-  max-width: 680px;
+  width: 100%;
+  max-width: 760px;
   margin-inline: auto;
+  padding-inline: 20px;
 }
 
 /* prefers-reduced-motion */

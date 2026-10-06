@@ -19,7 +19,7 @@ const LANGUAGES: { code: Locale; name: string }[] = [
 
 export const LanguagesBar: React.FC<LanguagesBarProps> = ({ t, currentLocale, onSelectLocale }) => {
   return (
-    <section className="py-6 border-y border-[var(--border)] bg-[var(--surface-2)]/60" aria-label={t.a11y.languages}>
+    <section className="py-6 border-y border-[var(--border)] bg-[var(--surface-2)]" aria-label={t.a11y.languages}>
       <div className="container-main flex flex-wrap items-center justify-center gap-3 text-xs">
         <span className="font-semibold text-[var(--ink-2)]">{t.langs.availableIn}:</span>
         <div className="flex flex-wrap items-center gap-2">

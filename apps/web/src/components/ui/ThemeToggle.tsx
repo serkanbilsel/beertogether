@@ -18,12 +18,12 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({ theme, onToggle, class
       onClick={onToggle}
       aria-label={isDark ? 'Açık Moda Geç' : 'Koyu Moda Geç'}
       title={isDark ? 'Açık Moda Geç' : 'Koyu Moda Geç'}
-      className={`relative inline-flex items-center justify-center w-10 h-10 rounded-xl bg-[var(--surface)] hover:bg-[var(--surface-2)] text-[var(--ink)] border border-[var(--border)] shadow-sm transition-all duration-200 active:scale-95 ${className}`}
+      className={`relative inline-flex items-center justify-center w-[40px] h-[40px] rounded-full bg-[var(--surface-2)] hover:bg-[var(--surface)] text-[var(--ink)] border border-[var(--border)] transition-all duration-[var(--dur-fast)] active:scale-95 focus:outline-none cursor-pointer ${className}`}
     >
       {isDark ? (
-        <Sun className="w-4.5 h-4.5 text-amber-400 animate-spin-slow" />
+        <Sun className="w-4 h-4 text-[var(--accent)] transition-transform duration-300 stroke-[2]" />
       ) : (
-        <Moon className="w-4.5 h-4.5 text-zinc-700" />
+        <Moon className="w-4 h-4 text-[var(--ink)] transition-transform duration-300 stroke-[2]" />
       )}
     </button>
   );

@@ -5,6 +5,8 @@ import { Card } from '@/components/ui/Card';
 import { Calendar } from 'lucide-react';
 import { getTranslation } from '@/lib/translations';
 
+export const dynamic = 'force-dynamic';
+
 interface Props {
   params: {
     token: string;

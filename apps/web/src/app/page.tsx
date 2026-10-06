@@ -26,15 +26,13 @@ export default function LandingPage() {
   useEffect(() => {
     // Check saved theme or default to dark
     const savedTheme = localStorage.getItem('bt-theme') as 'light' | 'dark' | null;
-    if (savedTheme) {
-      setTheme(savedTheme);
-      if (savedTheme === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-    } else {
+    const initialTheme = savedTheme || 'dark';
+    setTheme(initialTheme);
+    document.documentElement.setAttribute('data-theme', initialTheme);
+    if (initialTheme === 'dark') {
       document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
     }
   }, []);
 
@@ -42,6 +40,7 @@ export default function LandingPage() {
     const nextTheme = theme === 'dark' ? 'light' : 'dark';
     setTheme(nextTheme);
     localStorage.setItem('bt-theme', nextTheme);
+    document.documentElement.setAttribute('data-theme', nextTheme);
     if (nextTheme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
@@ -64,8 +63,8 @@ export default function LandingPage() {
       />
 
       <main id="main-content" className="flex-1">
-        {/* 2. Hero with Theme-Synced 3D iPhone */}
-        <Hero t={t} theme={theme} />
+        {/* 2. Hero with Theme-Synced & Language-Synced 3D iPhone */}
+        <Hero t={t} theme={theme} locale={locale} />
 
         {/* 3. How It Works */}
         <HowItWorks t={t} />

@@ -1,19 +1,19 @@
 import type { Metadata } from 'next';
-import { Inter, Inter_Tight } from 'next/font/google';
+import { Bricolage_Grotesque, DM_Sans } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({
+const bricolage = Bricolage_Grotesque({
+  subsets: ['latin', 'latin-ext'],
+  display: 'swap',
+  variable: '--font-display',
+  weight: ['400', '500', '600', '700', '800'],
+});
+
+const dmSans = DM_Sans({
   subsets: ['latin', 'latin-ext'],
   display: 'swap',
   variable: '--font-sans',
   weight: ['400', '500', '600', '700'],
-});
-
-const interTight = Inter_Tight({
-  subsets: ['latin', 'latin-ext'],
-  display: 'swap',
-  variable: '--font-display',
-  weight: ['600', '700', '800'],
 });
 
 export const metadata: Metadata = {
@@ -72,14 +72,14 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="tr" className={`${inter.variable} ${interTight.variable}`}>
+    <html lang="tr" className={`${bricolage.variable} ${dmSans.variable}`}>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="font-sans antialiased bg-[#FAFAF9] text-[#1C1917] selection:bg-[#F59E0B] selection:text-[#1C1917]">
+      <body className="antialiased bg-[var(--bg)] text-[var(--ink)] selection:bg-[var(--accent)] selection:text-[var(--accent-ink)]">
         {children}
       </body>
     </html>

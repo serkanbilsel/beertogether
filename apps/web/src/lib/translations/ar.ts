@@ -100,6 +100,9 @@ export const ar: TranslationType = {
     time: 'الجمعة · 20:00',
     participants: '2 انضموا',
     planYours: 'خطط للقائك مع Beer Together',
+    verifiedMeetup: 'لقاء موثق',
+    locationSnippet: 'مودا · موثق بـ GPS لمسافة 150م',
+    eventTitle: 'أمسية الجمعة في بلفاست',
   },
   trust: {
     h2: 'صُمم للأصدقاء الحقيقيين.',

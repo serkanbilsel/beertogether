@@ -100,6 +100,9 @@ export const es: TranslationType = {
     time: 'Viernes · 20:00',
     participants: '2 asistieron',
     planYours: 'Organiza el tuyo con Beer Together',
+    verifiedMeetup: 'Encuentro verificado',
+    locationSnippet: 'Moda · Verificado por GPS 150m',
+    eventTitle: 'Noche de viernes en Belfast',
   },
   trust: {
     h2: 'Pensado para amigos de verdad.',

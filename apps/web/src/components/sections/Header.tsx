@@ -3,8 +3,7 @@ import { TranslationType } from '@/lib/translations/en';
 import { Locale } from '@/lib/translations';
 import { LanguageSwitcher } from '../ui/LanguageSwitcher';
 import { ThemeToggle } from '../ui/ThemeToggle';
-import { Button } from '../ui/Button';
-import { Menu, X } from 'lucide-react';
+import { Beer, Menu, X } from 'lucide-react';
 
 interface HeaderProps {
   t: TranslationType;
@@ -23,10 +22,25 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>('');
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 12);
+      
+      const sections = ['how', 'features', 'safety', 'faq'];
+      const scrollPos = window.scrollY + 100;
+      for (const section of sections) {
+        const el = document.getElementById(section);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPos >= top && scrollPos < top + height) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -48,135 +62,152 @@ export const Header: React.FC<HeaderProps> = ({
     };
   }, [mobileMenuOpen]);
 
+  const navLinks = [
+    { id: 'how', href: '#how', label: t.nav.howItWorks },
+    { id: 'features', href: '#features', label: t.nav.features },
+    { id: 'safety', href: '#safety', label: t.nav.safety },
+    { id: 'faq', href: '#faq', label: t.nav.faq },
+  ];
+
   return (
     <>
       <a href="#main-content" className="skip-link">
         {t.nav.skipToContent}
       </a>
 
+      {/* 5.1 Header: 72px sticky, 80% opacity, backdrop-filter blur(12px), border only on scroll */}
       <header
-        className={`sticky top-0 z-40 w-full h-[68px] transition-all duration-[var(--dur-fast)] ${
-          isScrolled
-            ? 'bg-[var(--bg)]/90 backdrop-blur-md border-b border-[var(--border)] shadow-sm'
-            : 'bg-transparent'
+        className={`sticky top-0 z-40 w-full h-[72px] transition-colors duration-200 backdrop-blur-[12px] bg-[var(--bg)]/80 ${
+          isScrolled ? 'border-b border-[var(--border)]' : 'border-b border-transparent'
         }`}
       >
         <div className="container-main h-full flex items-center justify-between">
-          {/* Brand Logo */}
+          {/* Left: Brand Logo (Sculpted, iconic brand wordmark) */}
           <a
             href="#"
             aria-label={t.a11y.home}
-            className="flex items-center gap-2.5 font-sans font-bold text-lg text-[var(--ink)]"
+            className="flex items-center gap-2.5 group select-none transition-transform active:scale-95"
           >
-            <div className="w-8 h-8 rounded-[var(--radius-sm)] bg-[var(--accent)] text-[var(--accent-ink)] flex items-center justify-center font-bold text-sm shadow-sm">
-              BT
+            <div className="w-8 h-8 rounded-full bg-[var(--accent)] text-[var(--accent-ink)] flex items-center justify-center shadow-[0_2px_10px_rgba(232,163,61,0.35)] group-hover:scale-105 transition-transform">
+              <Beer className="w-4 h-4 stroke-[2.2]" />
             </div>
-            <span className="tracking-tight">
-              Beer Together
-            </span>
+            <div className="flex items-baseline">
+              <span className="font-display font-black text-[18px] tracking-[-0.02em] uppercase text-[var(--ink)]">
+                BEER<span className="text-[var(--accent)] ms-1">TOGETHER</span>
+              </span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] ms-1 inline-block" />
+            </div>
           </a>
 
-          {/* Desktop Nav Links (≥ 1024px) */}
-          <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-[var(--ink-2)]" aria-label={t.a11y.mainNav}>
-            <a href="#how" className="hover:text-[var(--ink)] transition-colors">
-              {t.nav.howItWorks}
-            </a>
-            <a href="#features" className="hover:text-[var(--ink)] transition-colors">
-              {t.nav.features}
-            </a>
-            <a href="#safety" className="hover:text-[var(--ink)] transition-colors">
-              {t.nav.safety}
-            </a>
-            <a href="#faq" className="hover:text-[var(--ink)] transition-colors">
-              {t.nav.faq}
-            </a>
+          {/* Center (≥1024px): How it works · Features · Safety · FAQ */}
+          <nav
+            className="hidden lg:flex items-center gap-1.5 font-display text-[14px] font-semibold text-[var(--ink-2)]"
+            aria-label={t.a11y.mainNav}
+          >
+            {navLinks.map((link) => (
+              <a
+                key={link.id}
+                href={link.href}
+                className={`px-4 py-2 rounded-full transition-all duration-[var(--dur-fast)] tracking-[-0.015em] ${
+                  activeSection === link.id
+                    ? 'text-[var(--ink)] font-bold bg-[var(--surface-2)] shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]'
+                    : 'hover:text-[var(--ink)] hover:bg-[var(--surface-2)]/70'
+                }`}
+              >
+                {link.label}
+              </a>
+            ))}
           </nav>
 
-          {/* Desktop Right Actions */}
+          {/* Right: Language switcher + Theme toggle + Primary "Get the app" CTA */}
           <div className="hidden lg:flex items-center gap-3">
-            <LanguageSwitcher currentLocale={locale} onSelectLocale={onLocaleChange} ariaLabel={t.a11y.language} />
+            <LanguageSwitcher
+              currentLocale={locale}
+              onSelectLocale={onLocaleChange}
+              ariaLabel={t.a11y.language}
+            />
             <ThemeToggle theme={theme} onToggle={onThemeToggle} />
-            <Button size="sm" asLink href="#download">
+            <a
+              href="#download"
+              className="h-[42px] px-5 rounded-full bg-[var(--accent)] text-[var(--accent-ink)] font-display font-bold text-[13.5px] tracking-[-0.01em] inline-flex items-center justify-center shadow-[0_2px_12px_rgba(232,163,61,0.35)] hover:bg-[var(--accent-hover)] transition-all duration-[var(--dur-fast)] active:translate-y-0 hover:-translate-y-0.5"
+            >
               {t.nav.getApp}
-            </Button>
+            </a>
           </div>
 
-          {/* Mobile Actions (< 1024px) */}
+          {/* Mobile Right Controls (<1024px) */}
           <div className="flex lg:hidden items-center gap-2">
-            <LanguageSwitcher currentLocale={locale} onSelectLocale={onLocaleChange} ariaLabel={t.a11y.language} />
+            <LanguageSwitcher
+              currentLocale={locale}
+              onSelectLocale={onLocaleChange}
+              ariaLabel={t.a11y.language}
+            />
             <ThemeToggle theme={theme} onToggle={onThemeToggle} />
             <button
               onClick={() => setMobileMenuOpen(true)}
               aria-label={t.nav.menu}
-              className="p-2 rounded-[var(--radius-sm)] text-[var(--ink)] border border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-2)] focus:outline-none"
+              className="w-10 h-10 flex items-center justify-center rounded-[var(--radius-md)] text-[var(--ink)] hover:bg-[var(--surface-2)] active:scale-95 transition-all focus:outline-none"
             >
-              <Menu className="w-5 h-5" />
+              <Menu className="w-5 h-5 stroke-[1.75]" />
             </button>
           </div>
         </div>
       </header>
 
-      {/* Mobile Fullscreen Sheet Menu */}
+      {/* Mobile Menu: Full-screen sheet with focus trap, backdrop blur, Esc support */}
       {mobileMenuOpen && (
         <div
           role="dialog"
           aria-modal="true"
           aria-label={t.nav.menu}
-          className="fixed inset-0 z-50 bg-[#FAFAF9] p-6 flex flex-col justify-between"
+          className="fixed inset-0 z-50 bg-[var(--ink)]/40 backdrop-blur-md flex flex-col p-4 sm:p-6"
+          onClick={() => setMobileMenuOpen(false)}
         >
-          <div>
-            <div className="flex items-center justify-between pb-6 border-b border-[var(--border)]">
-              <div className="flex items-center gap-2.5 font-bold text-lg text-[var(--ink)]">
-                <div className="w-8 h-8 rounded-[var(--radius-sm)] bg-[var(--accent)] text-[var(--accent-ink)] flex items-center justify-center font-bold">
-                  BT
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="w-full max-w-lg mx-auto my-auto rounded-[var(--radius-xl)] bg-[var(--surface)] text-[var(--ink)] border border-[var(--border)] shadow-[var(--shadow-lg)] p-6 space-y-6"
+          >
+            {/* Sheet Header */}
+            <div className="flex items-center justify-between pb-2 border-b border-[var(--border)]">
+              <div className="flex items-center gap-2.5 font-bold text-base text-[var(--ink)]">
+                <div className="w-8 h-8 rounded-[var(--radius-md)] bg-[var(--accent)] text-[var(--accent-ink)] flex items-center justify-center">
+                  <Beer className="w-4 h-4 stroke-[2]" />
                 </div>
                 <span>Beer Together</span>
               </div>
               <button
                 onClick={() => setMobileMenuOpen(false)}
                 aria-label={t.nav.close}
-                className="p-2 rounded-[var(--radius-sm)] border border-[var(--border)] text-[var(--ink)] bg-[var(--surface)] hover:bg-[var(--surface-2)] focus:outline-none"
+                className="w-9 h-9 flex items-center justify-center rounded-[var(--radius-md)] text-[var(--ink-2)] hover:text-[var(--ink)] hover:bg-[var(--surface-2)] active:scale-90 transition-all focus:outline-none"
               >
-                <X className="w-5 h-5" />
+                <X className="w-5 h-5 stroke-[2]" />
               </button>
             </div>
 
-            <nav className="flex flex-col gap-5 pt-8 text-lg font-semibold text-[var(--ink)] text-start" aria-label={t.a11y.mainNav}>
-              <a
-                href="#how"
-                onClick={() => setMobileMenuOpen(false)}
-                className="hover:text-[var(--accent-text)]"
-              >
-                {t.nav.howItWorks}
-              </a>
-              <a
-                href="#features"
-                onClick={() => setMobileMenuOpen(false)}
-                className="hover:text-[var(--accent-text)]"
-              >
-                {t.nav.features}
-              </a>
-              <a
-                href="#safety"
-                onClick={() => setMobileMenuOpen(false)}
-                className="hover:text-[var(--accent-text)]"
-              >
-                {t.nav.safety}
-              </a>
-              <a
-                href="#faq"
-                onClick={() => setMobileMenuOpen(false)}
-                className="hover:text-[var(--accent-text)]"
-              >
-                {t.nav.faq}
-              </a>
+            {/* Sheet Navigation */}
+            <nav className="flex flex-col gap-1.5" aria-label={t.a11y.mainNav}>
+              {navLinks.map((item) => (
+                <a
+                  key={item.id}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="px-4 py-3 rounded-[var(--radius-md)] text-[16px] font-semibold text-[var(--ink)] hover:bg-[var(--surface-2)] transition-colors text-start"
+                >
+                  {item.label}
+                </a>
+              ))}
             </nav>
-          </div>
 
-          <div className="space-y-4 pt-6 border-t border-[var(--border)]">
-            <Button size="lg" asLink href="#download" onClick={() => setMobileMenuOpen(false)} className="w-full">
-              {t.nav.getApp}
-            </Button>
+            {/* Sheet Primary CTA */}
+            <div className="pt-2">
+              <a
+                href="#download"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full h-[48px] rounded-[var(--radius-md)] bg-[var(--accent)] text-[var(--accent-ink)] font-bold text-[15px] flex items-center justify-center shadow-sm hover:bg-[var(--accent-hover)] active:scale-[0.98] transition-all"
+              >
+                {t.nav.getApp}
+              </a>
+            </div>
           </div>
         </div>
       )}

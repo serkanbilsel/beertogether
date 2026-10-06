@@ -19,13 +19,14 @@ export const Accordion: React.FC<AccordionProps> = ({ items, className = '' }) =
       {items.map((item, idx) => (
         <details
           key={idx}
-          className="group rounded-[var(--radius-lg)] border border-[#1F2438] bg-[#0C0E17]/85 backdrop-blur-md p-6 transition-all duration-[var(--dur-base)] open:border-[var(--accent)] open:shadow-[0_8px_30px_rgba(255,179,0,0.12)]"
+          name="faq-group"
+          className="group rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--surface)] p-5 md:p-6 transition-all duration-200 open:border-[var(--accent)] open:shadow-[var(--shadow-sm)]"
         >
-          <summary className="flex items-center justify-between font-display font-bold text-white text-base sm:text-lg cursor-pointer list-none select-none">
-            <span className="text-start">{item.question}</span>
-            <ChevronDown className="w-5 h-5 text-slate-400 transition-transform duration-[var(--dur-base)] group-open:rotate-180 group-open:text-[var(--accent)] shrink-0 ms-4" />
+          <summary className="flex items-center justify-between font-sans font-bold text-[var(--ink)] text-base sm:text-lg cursor-pointer list-none select-none">
+            <span className="text-start pe-4">{item.question}</span>
+            <ChevronDown className="w-5 h-5 text-[var(--ink-3)] transition-transform duration-200 group-open:rotate-180 group-open:text-[var(--accent-text)] shrink-0" />
           </summary>
-          <div className="mt-4 text-body text-sm sm:text-base border-t border-[#1F2438] pt-4 leading-relaxed text-slate-300 text-start">
+          <div className="mt-3.5 text-body text-sm sm:text-base border-t border-[var(--border)] pt-3.5 leading-relaxed text-[var(--ink-2)] text-start">
             {item.answer}
           </div>
         </details>
